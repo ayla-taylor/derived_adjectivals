@@ -10,6 +10,9 @@ NOT_BEFORE = {}
 TARGETS = {'blackened', 'cleaned', 'cleared', 'cooled', 'deepen', 'dirtied', 'dried', 'hardened', 'toughened',
            'enlarged', 'lengthened', 'reddened', 'sharpened', 'shortened', 'smoothed', 'softened', 'straightened',
            'strengthened', 'sweetened', 'tighten', 'warmed', 'weakened', 'whitened', 'widened'}
+TARGET_ROOT = {'black', 'clean', 'clear', 'cool', 'deep', 'dirty', 'dry', 'hard', 'tough', 'large', 'long', 'red',
+               'sharp','short', 'smooth', 'soft', 'straight', 'strength', 'sweet', 'tight', 'warm', 'weak', 'white',
+               'wide'}
 
 
 @attrs.define
@@ -26,11 +29,14 @@ def is_derived(sent: list[dict]):
     for word in sent:
         words[int(word['id'])] = Word(word['id'], word['text'], word['upos'], word['xpos'], word['head'])
     for i, word in words.items():
-        if word.text in TARGETS and word.head != 0 and words[word.head].upos == 'NOUN':
-            if i + 1 < len(words) and words[i+1].text in NOT_AFTER:
-                return False
+        if word.text in TARGETS:
+            if word.head != 0 and words[word.head].upos == 'NOUN':
+                if i + 1 < len(words) and words[i+1].text in NOT_AFTER:
+                    return False
+                else:
+                    return True
             else:
-                return True
+                return False
 
 
 @click.command()
