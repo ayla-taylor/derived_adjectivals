@@ -11,7 +11,7 @@ def main(file1: str, file2: str):
     not_end = True
     while not_end:
         inp = input("Enter word pair (separated by space) or quit:")
-        if inp[0] == 'q':
+        if inp[0].lower() == 'q':
             not_end = False
         # elif inp.split()[0] not in set(dict_0.keys) or inp.split()[1] not in set(dict_2.keys()):
         #     print("invalid input")
@@ -29,8 +29,10 @@ def main(file1: str, file2: str):
             print('Top head:\t', w0_head_counts[0][0], '\t', w2_head_counts[0][0])
             w0_head_set = set(w0_dict['head_counts'].keys())
             w2_head_set = set(w2_dict['head_counts'].keys())
+            print('Number of heads:', len(w0_head_set), '\t', len(w2_head_set))
+            print("Number of mutual heads:", len(w0_head_set & w2_head_set))
             print('Mutual heads:')
-            print(str(w0_head_set & w2_head_set).encode('utf-8'))
+            print(w0_head_set & w2_head_set)
             print('Only 2nd Order heads:')
             print(w2_head_set - w0_head_set)
             print()
