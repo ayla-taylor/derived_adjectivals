@@ -37,6 +37,7 @@ def make_outdict(order: int, json_file: str):
                     head_index = w['head']
                     head = word_dicts[head_index - 1]
                     out_dict[target_w]['head_counts'][head['text']] += 1
+                    # print(out_dict[target_w])
     dict_list = list(out_dict.items())
     dict_list.sort(key=lambda y: y[1]['total_count'], reverse=True)
     # for key, d in dict_list:

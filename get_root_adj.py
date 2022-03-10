@@ -10,7 +10,9 @@ TARGET = {'black', 'clean', 'clear', 'cool', 'deep', 'dirty', 'dry', 'hard', 'to
 def is_root(sent: list[dict]) -> bool:
     for word in sent:
         if word['text'] in TARGET and word['upos'] == 'ADJ':
-            return True
+            if word['head'] != 0:
+                if sent[word['head']-1]['upos'] == 'NOUN':
+                    return True
 
 
 @click.command()
