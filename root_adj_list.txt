@@ -15,10 +15,12 @@ short
 smooth
 soft
 straight
-strength
+strong
 sweet
 tight
 warm
 weak
 white
 wide
+flat
+round

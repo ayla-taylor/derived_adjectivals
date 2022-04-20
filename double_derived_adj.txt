@@ -2,7 +2,7 @@ blackened
 cleaned
 cleared
 cooled
-deepen
+deepened
 dirtied
 dried
 hardened
@@ -17,8 +17,10 @@ softened
 straightened
 strengthened
 sweetened
-tighten
+tightened
 warmed
 weakened
 whitened
 widened
+flattened
+rounded
