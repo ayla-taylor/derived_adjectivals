@@ -1,10 +1,8 @@
 import os
 import json
-import stanza
 import spacy
 import tqdm
-import numpy
-from typing import Iterable
+
 
 WORD_LISTS = ['root_adj_list.txt', 'root_verb_list.txt', 'double_derived_adj.txt']
 SOURCE_FILES = ['c4-train.00001-of-01024_adj_ayla_2_filtered.json',
@@ -28,6 +26,7 @@ def match_with_words(parsed_doc, word_dicts: list[dict[str:str]]) -> None:
                                  'tags': [i.tag_ for i in parsed_doc],
                                  'heads': [i.head.text for i in parsed_doc],
                                  'deps': [i.dep_ for i in parsed_doc],
+                                 'sent_start': [i.is_sent_start for i in parsed_doc],
                                  'text': parsed_doc.text}
                 word_dict[word.text] += json.dumps(per_word_dict) + '\n'
 
@@ -49,7 +48,7 @@ def main():
         dir_name = '_'.join([file_split[0], file_split[1]])
         if not os.path.isdir(dir_name):
             os.makedirs(dir_name)
-        dirs.append(dir_name+'\\')
+        dirs.append(dir_name+'/')
         words = dict()
         assert os.path.isfile(filename)
         with open(filename, 'r', encoding='utf-8') as wf:
