@@ -41,19 +41,35 @@ def main():
                 for classification in sent['classifications']:
                     if classification['correct']:
                         tag = classification['classname']
-                        # print(sent['classifications'])
-                        sense = SENSE_DICT[target_word][tag]
-                        sent_list = {'text': data_sentence,  'text2': sense}
-                        # print(sent_list)
-                        sentence_dicts.append(sent_list)
+                        for sense_tag, sense_def in SENSE_DICT[target_word].items():
+                            if sense_tag == tag:
+                                sentence_dicts.append({'text1': data_sentence, 'text2': sense_def, 'label': 1})
+                            else:
+                                sentence_dicts.append({'text1': data_sentence, 'text2': sense_def, 'label': 0})
     random.shuffle(sentence_dicts)
-    train = pd.DataFrame(sentence_dicts[:int(len(sentence_dicts) * .8)], columns=['text', 'text2'])
-    dev = pd.DataFrame(sentence_dicts[int(len(sentence_dicts) * .8):int(len(sentence_dicts) * .9)], columns=['text', 'text2'])
-    test = pd.DataFrame(sentence_dicts[-int(len(sentence_dicts) * .1):], columns=['text', 'text2'])
-    print(test)
+
+    train = pd.DataFrame(sentence_dicts[:int(len(sentence_dicts) * .8)], columns=['text1', 'text2', 'label'])
+    dev = pd.DataFrame(sentence_dicts[int(len(sentence_dicts) * .8):int(len(sentence_dicts) * .9)], columns=['text1', 'text2', 'label'])
+    test = pd.DataFrame(sentence_dicts[-int(len(sentence_dicts) * .1):], columns=['text1', 'text2', 'label'])
     splits = {'train': train, 'dev': dev, 'test': test}
+    # splits_fixed = dict()
+    # for split_name, split_list in splits.items():
+    #     split_dict = {'text1': [], 'text2': []}
+    #     for sent_dict in split_list:
+    #         split_dict['text1'].append(sent_dict['text1'])
+    #         split_dict['text2'].append(sent_dict['text2'])
+    #     split_df = pd.DataFrame
+    #     splits_fixed[split_name] = split_dict
+
+    # train = pd.DataFrame(sentence_dicts[:int(len(sentence_dicts) * .8)], columns=['text', 'text2'])
+    # dev = pd.DataFrame(sentence_dicts[int(len(sentence_dicts) * .8):int(len(sentence_dicts) * .9)], columns=['text', 'text2'])
+    # test = pd.DataFrame(sentence_dicts[-int(len(sentence_dicts) * .1):], columns=['text', 'text2'])
+    # print(test)
+
     for split_name, split_df in splits.items():
+        # with open ('../data/data/glossbert/'+ split_name + '.json', 'w', encoding='utf8') as f:
         split_df.to_csv('../data/data/glossbert/' + split_name + '.csv', index=False)
+            # json.dump(split_d, f)
 
 
 if __name__ == '__main__':

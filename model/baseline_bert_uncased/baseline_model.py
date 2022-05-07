@@ -15,7 +15,7 @@ def compute_metrics(eval_pred):
 
 
 def make_datasets():
-    filepath = '../data/data/'
+    filepath = '../../data/data/'
     dataset = load_dataset('csv', data_files={'train': filepath + 'train.csv',
                                               'dev': filepath + 'dev.csv',
                                               'test': filepath + 'test.csv'})

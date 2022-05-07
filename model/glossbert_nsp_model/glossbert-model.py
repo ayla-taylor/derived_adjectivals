@@ -1,12 +1,20 @@
 from datasets import load_dataset, load_metric, ClassLabel, Value
-from transformers import BertTokenizer, Trainer, TrainingArguments, BertForNextSentencePrediction
+from transformers import BertTokenizer, BertForNextSentencePrediction, AdamW
 import numpy as np
 import torch
+from tqdm import tqdm
 
 
 # SENSE_LABELS = ['True', 'False' ]  # ?
 F1_METRIC = load_metric('f1')
 
+class DerivedAdjDataset(torch.utils.data.Dataset):
+    def __init__(self, encodings):
+        self.encodings = encodings
+    def __getitem__(self, idx):
+        return {key: torch.tensor(val[idx]) for key, val in self.encodings.items()}
+    def __len__(self):
+        return len(self.encodings.input_ids)
 
 def compute_metrics(eval_pred):
     predictions, labels = eval_pred
@@ -15,12 +23,12 @@ def compute_metrics(eval_pred):
 
 
 def make_datasets():
-    filepath = '../data/data/glossbert/'
+    filepath = '../../data/data/glossbert/'
     dataset = load_dataset('csv', data_files={'train': filepath + 'train.csv',
                                               'dev': filepath + 'dev.csv',
                                               'test': filepath + 'test.csv'})
     # class_labels = ClassLabel(num_classes=len(SENSE_LABELS), names=list(SENSE_LABELS))
-    print(dataset['train'])
+    # print(dataset['train'].features)
     #
     # def label_str2int(examples):
     #     return {'label': class_labels.str2int(examples['label'])}
@@ -35,12 +43,14 @@ def make_datasets():
 
     print('tokenizing...')
 
+    def encode(examples):
+        # print(examples)
+        return tokenizer(examples['text1'], return_tensors='pt', truncation=True, padding='max_length', max_length=128)
 
-    # def encode(examples):
-    #     return tokenizer(examples['text'], examples['text2'], return_tensors='pt', truncation=True, padding='max_length', max_length=128)
-
-    inputs = tokenizer(dataset, return_tensors='pt', truncation=True, padding='max_length', max_length=128)
+    inputs = dataset.map(encode)  #, batched=True)
+    # inputs = tokenizer(dataset, return_tensors='pt', truncation=True, padding='max_length', max_length=128)
     print(inputs)
+    inputs['train'].features['labels'] = torch.LongTensor([inputs['train'].features['label']]).T
     # print(dataset['train'].features['target'])
 
     # new_features = encoded_dataset['train'].features.copy()
@@ -65,12 +75,38 @@ def make_datasets():
     #     compute_metrics=compute_metrics
     # )
     print("Training...")
-    labels = torch.LongTensor([0])
-    outputs = model(**inputs, labels=labels)
-    print('loss:', outputs.loss.items())
+
+
+
+    dataset = DerivedAdjDataset(inputs)
+    loader = torch.utils.data.DataLoader(dataset, batch_size=16, shuffle=True)
+
+    device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    model.to(device)
+
+    model.train()
+    optim = AdamW(model.parameters, lr=5e-6)
+    # labels = torch.LongTensor([0])
+    # outputs = model(**inputs, labels=labels)
+    # print('loss:', outputs.loss.items())
     # trainer.train()
 
     # tf_train_set =
+    epochs = 10
+    for epoch in range(epochs):
+        loop = tqdm(loader, leave=True)
+        for batch in loop:
+            optim.zero_grad()
+            input_ids = batch['input_ids'].to(device)
+            attention_mask = batch['attention_mask'].to(device)
+            labels = batch['labels'].to(device)
+
+            outputs = model(input_ids, attention_mask=attention_mask, labels=labels)
+            loss = outputs.loss
+            loss.backwards()
+            optim.step()
+            loop.set_description(f'Epoch {epoch}')
+            loop.set_postfix(loss=loss.item())
 
 
 if __name__ == "__main__":
