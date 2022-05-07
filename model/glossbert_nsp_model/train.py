@@ -26,20 +26,47 @@ def make_datasets(data: tuple[str, Any], tokenizer: BertTokenizer) -> DataLoader
 
 def train(dataloader: DataLoader, model: Any):
     print("Training...")
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    model.train().to(device)
-    optim = torch.optim.AdamW(params=model.parameters(), lr=1e-5)
-    for epoch in range(3):
-        for i, batch in enumerate(tqdm(dataloader)):
+    # device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    # model.train().to(device)
+    # optim = torch.optim.AdamW(params=model.parameters(), lr=1e-5)
+    # for epoch in range(3):
+    #     for i, batch in enumerate(tqdm(dataloader)):
+    #         batch = {k: v.to(device) for k, v in batch.items()}
+    #         outputs = model(**batch)
+    #         loss = outputs[0]
+    #         loss.backward()
+    #         optim.step()
+    #         optim.zero_grad()
+    #         if i % 10 == 0:
+    #             print(f"loss: {loss}")
+
+    device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    model.to(device)
+
+    model.train()
+    optim = torch.optim.AdamW(params=model.parameters(), lr=5e-6)
+    epochs = 10
+    for epoch in range(epochs):
+        loop = tqdm(dataloader, leave=True)
+        for batch in loop:
             batch = {k: v.to(device) for k, v in batch.items()}
             outputs = model(**batch)
             loss = outputs[0]
             loss.backward()
             optim.step()
             optim.zero_grad()
-            if i % 10 == 0:
-                print(f"loss: {loss}")
 
+            # optim.zero_grad()
+            # input_ids = batch['input_ids'].to(device)
+            # attention_mask = batch['attention_mask'].to(device)
+            # labels = batch['labels'].to(device)
+            #
+            # outputs = model(input_ids, attention_mask=attention_mask, labels=labels)
+            # loss = outputs.loss
+            # loss.backwards()
+            # optim.step()
+            loop.set_description(f'Epoch {epoch}')
+            loop.set_postfix(loss=loss.item())
 
 def main():
     tokenizer = BertTokenizer.from_pretrained('distilbert-base-uncased')

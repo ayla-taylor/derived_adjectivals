@@ -86,12 +86,6 @@ def make_datasets():
 
     model.train()
     optim = AdamW(model.parameters, lr=5e-6)
-    # labels = torch.LongTensor([0])
-    # outputs = model(**inputs, labels=labels)
-    # print('loss:', outputs.loss.items())
-    # trainer.train()
-
-    # tf_train_set =
     epochs = 10
     for epoch in range(epochs):
         loop = tqdm(loader, leave=True)
