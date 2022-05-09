@@ -9,7 +9,11 @@ SENSE_DICT = {'cool': {'Sense 1': 'cool: trendy, fashonable, interesting',
                        'Sense 2': 'cool: of or at a relatively low temperature'},
               'hard': {'Sense 1': 'hard: difficult',
                        'Sense 2': 'hard: Forceful, potent, vigorous',
-                       'Sense 3': 'hard: Firm, solid, resistant to pressure, tangible'}}
+                       'Sense 3': 'hard: Firm, solid, resistant to pressure, tangible'}
+              'black': {'Sense 1': 'difficult, challenging',
+                        'Sense 2': 'people',
+                        'Sense 3': 'firm, solid, resistant to pressure'},
+              }
 
 
 def read_file(filename: str) -> dict:

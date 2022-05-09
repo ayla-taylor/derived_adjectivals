@@ -64,6 +64,8 @@ def make_datasets():
     print("Training...")
     trainer.train()
 
+    print("Evaluating...")
+    trainer.evaluate()
 
 if __name__ == "__main__":
     make_datasets()
