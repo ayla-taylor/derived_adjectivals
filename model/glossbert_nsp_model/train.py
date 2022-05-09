@@ -24,15 +24,17 @@ def make_datasets(data: tuple[str, Any], tokenizer: BertTokenizer) -> DataLoader
         return tokenizer(examples['text1'], examples['text2'], truncation=True, padding='max_length', max_length=128)
 
     name, dataset = data
-    inputs = dataset.map(encode, batched=True)
-    inputs = inputs.map(lambda examples: {'labels': examples['label']}, batched=True)
-    inputs.set_format(type='torch', columns=['input_ids', 'token_type_ids', 'attention_mask', 'labels'])
+    inputs = dataset.map(encode)
+    # inputs = inputs.map(lambda examples: {'labels': examples['label']}, batched=True)
+    inputs = inputs.remove_columns(['text1', 'text2'])
+    inputs = inputs.rename_column('label', 'labels')
+    inputs = inputs.with_format('torch')
+    # inputs.set_format(type='torch', columns=['input_ids', 'token_type_ids', 'attention_mask', 'labels'])
     # dataloader = torch.utils.data.DataLoader(inputs, batch_size=32)
     return inputs
 
 
-
-def train(datasets: dict, model: Any):
+def train(datasets: dict, model: Any, tokenizer: Any):
     print("Training...")
     # device = 'cuda' if torch.cuda.is_available() else 'cpu'
     # model.train().to(device)
@@ -53,6 +55,8 @@ def train(datasets: dict, model: Any):
 
     args = TrainingArguments(
         'glossbert_model',
+        per_device_train_batch_size=16,
+        per_device_eval_batch_size=16,
         evaluation_strategy="steps",
         learning_rate=2e-5,
         num_train_epochs=5,
@@ -65,13 +69,16 @@ def train(datasets: dict, model: Any):
     trainer = Trainer(
         model,
         args,
-        train_dataset= datasets['train'],
-        eval_dataset= datasets['dev'],
-        compute_metrics=compute_metrics
+        train_dataset=datasets['train'],
+        eval_dataset=datasets['dev'],
+        compute_metrics=compute_metrics,
+        tokenizer=tokenizer
     )
     print("Training...")
     trainer.train()
-    trainer.evaluate()
+
+    # predictions = trainer.predict(datasets['dev'])
+    # metrics =
 
     # print("Evaluating...")
     # trainer.evaluate(datasets['test'])
@@ -115,7 +122,7 @@ def main():
     dataloaders = {}
     for name, data in dataset.items():
         dataloaders[name] = make_datasets((name, data), tokenizer)
-    train(dataloaders, model)
+    train(dataloaders, model, tokenizer)
 
 
 if __name__ == '__main__':
