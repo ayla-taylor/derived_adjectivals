@@ -85,7 +85,7 @@ def train(datasets: dict, model: Any, tokenizer: Any):
 
 
 
-    model.train()
+    # model.train()
     # optim = torch.optim.AdamW(params=model.parameters(), lr=5e-6)
     # epochs = 10
     # for epoch in range(epochs):
