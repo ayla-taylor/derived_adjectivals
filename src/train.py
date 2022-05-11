@@ -54,7 +54,7 @@ def train(datasets: dict, model: Any, tokenizer: Any):
     # model.to(device)
 
     args = TrainingArguments(
-        'glossbert_model',
+        '../model/glossbert_nsp_model/glossbert_model',
         evaluation_strategy="steps",
         learning_rate=2e-5,
         num_train_epochs=5,
@@ -111,7 +111,7 @@ def train(datasets: dict, model: Any, tokenizer: Any):
 def main():
     tokenizer = BertTokenizer.from_pretrained('distilbert-base-uncased')
     model = BertForNextSentencePrediction.from_pretrained('distilbert-base-uncased')
-    filepath = '../../data/data/glossbert/'
+    filepath = '../data/data/glossbert/'
     dataset = load_dataset('csv', data_files={'train': filepath + 'train.csv',
                                               'dev': filepath + 'dev.csv',
                                               'test': filepath + 'test.csv'})
