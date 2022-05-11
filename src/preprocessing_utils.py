@@ -27,12 +27,13 @@ def read_file(filename: str) -> dict:
 
 def get_head(sent: str, target_word) -> str:
     parsed_doc = spacy_nlp(sent)
-    print(parsed_doc)
     bracketed_target = '[' + target_word + ']'
-    for i, tok in enumerate(parsed_doc[1:-1]):
-        bracketed_word = ''.join(parsed_doc[i-1:i+1])
-        if bracketed_word == bracketed_target:
-            target = tok
-            head = target.head
-    return root_to_derived[target.text] + ' ' + head.text
+    target = ''
+    for i, tok in enumerate(parsed_doc):
+        if 0 < i < len(parsed_doc) - 1:
+            bracketed_word = ''.join(parsed_doc[i-1:i+2].text)
+            if bracketed_word == bracketed_target:
+                target = tok.text
+                head = tok.head.text
+    return root_to_derived[target] + ' ' + head
 
