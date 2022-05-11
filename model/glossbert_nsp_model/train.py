@@ -24,7 +24,7 @@ def make_datasets(data: tuple[str, Any], tokenizer: BertTokenizer) -> DataLoader
         return tokenizer(examples['text1'], examples['text2'], truncation=True, padding='max_length', max_length=128)
 
     name, dataset = data
-    inputs = dataset.map(encode)
+    inputs = dataset.map(encode, batched=True)
     # inputs = inputs.map(lambda examples: {'labels': examples['label']}, batched=True)
     inputs = inputs.remove_columns(['text1', 'text2'])
     inputs = inputs.rename_column('label', 'labels')
@@ -55,13 +55,10 @@ def train(datasets: dict, model: Any, tokenizer: Any):
 
     args = TrainingArguments(
         'glossbert_model',
-        per_device_train_batch_size=16,
-        per_device_eval_batch_size=16,
         evaluation_strategy="steps",
         learning_rate=2e-5,
         num_train_epochs=5,
         weight_decay=0.01,
-        do_eval= True,
         load_best_model_at_end=True,
         # fp16=True
     )
