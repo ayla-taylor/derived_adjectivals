@@ -1,0 +1,42 @@
+{
+	"cool": {
+		"Sense 1": "cool: trendy, fashonable, interesting",
+		"Sense 2": "cool: of or at a relatively low temperature"
+	},
+	"hard": {
+		"Sense 1": "hard: difficult",
+		"Sense 2": "hard: Forceful, potent, vigorous",
+		"Sense 3": "hard: Firm, solid, resistant to pressure, tangible"
+	},
+	"black": {
+		"Sense 1": "black: color",
+		"Sense 2": "black: people",
+		"Sense 3": "black: evil, bad, unsavory"
+	},
+	"soft": {
+		"Sense 1": "soft: squishy, yields to pressure, easily hurt",
+		"Sense 2": "soft: gentle, mild"
+	},
+	"deep": {
+		"Sense 1": "deep: intense, extreme, large in quantity or size",
+		"Sense 2": "deep: having great spatial penetration downwards or inwards",
+		"Sense 3": "deep: obscure, difficult to penetrate, hidden or incomprehensible"
+	},
+	"clear": {
+		"Sense 1": "clear: free of obstruction or barrier",
+		"Sense 2": "clear: obvious, easily perceptible, distinct, well-defined"
+	},
+	"clean": {
+		"Sense 1": "clean: unblemished, free from dirt or impurities, having no marks of discredit or offense",
+		"Sense 2": "clean: free from restrictions, without difficulties or problems, precisely or deftly executed"
+	},
+	"flat": {
+		"Sense 1": "flat: having little thickness, without slope, not bumpy",
+		"Sense 2": "flat: dull or uninteresting/unchanging"
+	},
+	"dry": {
+		"Sense 1": "dry: lacking in moisture",
+		"Sense 2": "dry: Sarcastic, passionless, or boring",
+		"Sense 3": "dry: (of wine or other alcohol) Has lots of tannins"
+	}
+}

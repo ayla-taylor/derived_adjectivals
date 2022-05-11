@@ -8,8 +8,8 @@ from datasets import load_dataset
 from model_utils import compute_metrics, MODEL_INFO, make_datasets
 
 parser = argparse.ArgumentParser(description="Train the various models")
-parser.add_argument('model', type=str, default='baseline', help='which model is this preprocessing for')
-# parser.add_argument('--from_scratch', type=bool, default=False, help='train all models from scratch')
+parser.add_argument('model', type=str, default='baseline', help='which model is this preprocessing for (default baseline)')
+# parser.add_argument('--from_scratch', action='store_true', default=False, help='train all models from scratch')
 parser.add_argument('lr', type=int, default=2e-5, help='learning rate')
 parser.add_argument('epochs', type=int, default=5, help='number of training epochs')
 parser.add_argument('weight_decay', type=int, default=0.01, help='weight decay')
