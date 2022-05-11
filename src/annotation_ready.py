@@ -1,3 +1,4 @@
+import random
 import sys
 import json
 import spacy
@@ -12,9 +13,6 @@ def parse(data: dict, index: int):
     sents = []
     target_word = data['target_word']
     text = data['text']
-    # print("*****")
-    # print(text)
-    # print("&&&&&&&")
     auto_sents = []
     parsed_doc = spacy_nlp(text)
     for sent in parsed_doc.sents:
@@ -22,9 +20,9 @@ def parse(data: dict, index: int):
         indexes = []
         for i, tok in enumerate(sent):
             if tok.text == target_word:
-                # print(sent)
+                print(sent)
                 # print(tok.text, tok.dep_, tok.head.text, tok.head.pos_)
-                if tok.dep_ == 'amod':
+                if tok.tag_ == 'JJ':
                     # print(tok.text)
                     # print(i)
                     auto_tagged_indexes.append(i)
@@ -105,7 +103,8 @@ def create_files(filename: str, subfolder: str) -> None:
     index = 0
     with open(path + subfolder + filename, 'r', encoding='utf8') as f:
         for line in tqdm.tqdm(f):
-            data = json.loads(line.strip())
+            data: dict = json.loads(line.strip())
+            # print(type(data))
             str_list, auto_str, index = parse(data, index)
             for s in str_list:
                 out_lines.append(s)
@@ -113,14 +112,17 @@ def create_files(filename: str, subfolder: str) -> None:
                 auto_lines.append(auto)
             # out_lines.append(parse(data))
     # outlines_uniq = list(set(out_lines))
+    random.shuffle(out_lines)
+    random.shuffle(auto_lines)
     with open(path + subfolder + outfile, "w", encoding='utf8') as out_f:
-        # json.dump(out_dict, out_f)
+        if len(out_lines) > 500:
+            out_lines = out_lines[:500]
         json.dump(out_lines, out_f)
-        #     out_f.write(line + '\n ')
+
     with open(path + subfolder + spacy_outfile, "w", encoding='utf8') as out_f:
-        # json.dump(out_dict, out_f)
+        if len(auto_lines) > 500:
+            auto_lines = auto_lines[:500]
         json.dump(auto_lines, out_f)
-        #     out_f.write(line + '\n ')
 
 
 def main():
@@ -129,6 +131,7 @@ def main():
     files = os.listdir(path + subfolder)
     # filename = 'double_derived/cooled.json'
     [create_files(file, subfolder) for file in files]
+
 
 if __name__ == '__main__':
     main()
