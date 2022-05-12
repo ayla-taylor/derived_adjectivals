@@ -94,13 +94,13 @@ for epoch in range(num_epochs):
         # Move tensors to the configured device
         # inputs = inputs.reshape(-1, 28 * 28).to(device)
         # batched_labels = batched_labels.to(device)
-        print(batched_inputs.shape)
-        print(batched_labels.shape)
-        print("****")
+        # print(batched_inputs.shape)
+        # print(batched_labels.shape)
+        # print("****")
         # Forward pass
         outputs = model(batched_inputs)
-        print(outputs.dtype)
-        print(batched_labels.dtype)
+        # print(outputs.dtype)
+        # print(batched_labels.dtype)
         loss = criterion(outputs, batched_labels)
 
         # Backward and optimize
