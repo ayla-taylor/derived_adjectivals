@@ -132,12 +132,12 @@ def train_full_model(model_dict: dict) -> None:
 
         # forward + backward + optimize
         outputs = model(inputs)
-        loss = loss(outputs, labels)
-        loss.backward()
+        l = loss(outputs, labels)
+        l.backward()
         optimizer.step()
 
         # print statistics
-        running_loss += loss.item()
+        running_loss += l.item()
         # f1 = compute_metrics(outputs, lable_1d)
         # print("f1:", f1, 'loss:', loss.item())
 
