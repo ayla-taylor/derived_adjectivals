@@ -92,19 +92,19 @@ def train_full_model(model_dict: dict) -> None:
     inputs_base = baseline_tokenizer(train_text1, train_text2, padding=True, truncation=True, return_tensors='pt')
     inputs_embeds = embed_tokenizer(train_derived_pairs, padding=True, truncation=True, return_tensors='pt')
     # inputs_base, inputs_embeds = model_dict['tokenized_datasets']['train']
-    print(inputs_base['input_ids'].shape, inputs_base['token_type_ids'].shape, inputs_base['attention_mask'].shape)
-    print(inputs_embeds['input_ids'].shape, inputs_embeds['token_type_ids'].shape, inputs_embeds['attention_mask'].shape)
+    # print(inputs_base['input_ids'].shape, inputs_base['token_type_ids'].shape, inputs_base['attention_mask'].shape)
+    # print(inputs_embeds['input_ids'].shape, inputs_embeds['token_type_ids'].shape, inputs_embeds['attention_mask'].shape)
 
     print("predicting baseline...")
     baseline_outputs = baseline_model(**inputs_base)
-    # baseline_last_hidden = baseline_outputs.last_hidden_state
+    baseline_last_hidden = baseline_outputs.last_hidden_state
     #
     # print("predicticing embedding...")
-    # embed_outputs = embed_model(**inputs_embeds)
-    # embed_last_hidden = embed_outputs.last_hidden_state
-    #
-    # print(baseline_last_hidden.size)
-    # print(embed_last_hidden.size)
+    embed_outputs = embed_model(**inputs_embeds)
+    embed_last_hidden = embed_outputs.last_hidden_state
+
+    print(baseline_last_hidden.size)
+    print(embed_last_hidden.size)
 
 
 #     dense_layer = torch.nn.Linear()
