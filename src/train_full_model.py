@@ -99,6 +99,8 @@ for epoch in range(num_epochs):
         print("****")
         # Forward pass
         outputs = model(batched_inputs)
+        print(outputs.dtype)
+        print(batched_labels.dtype)
         loss = criterion(outputs, batched_labels)
 
         # Backward and optimize
