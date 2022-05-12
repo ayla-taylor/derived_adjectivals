@@ -7,7 +7,7 @@ from nltk.metrics import scores
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Hyper-parameters
-input_size = 768
+input_size = 103680
 hidden_size = 500
 num_classes = 2
 num_epochs = 5
