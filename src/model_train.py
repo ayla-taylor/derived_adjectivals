@@ -137,7 +137,7 @@ def train_full_model(model_dict: dict) -> None:
 
         # print statistics
         running_loss += loss.item()
-        f1 = compute_metrics(outputs)
+        f1 = compute_metrics(outputs, labels)
         print("f1:", f1)
 
 
