@@ -4,6 +4,7 @@ import numpy as np
 from tqdm import tqdm
 
 import torch
+import torch.nn as nn
 from torch.utils.data import DataLoader
 from datasets import load_dataset, load_metric, ClassLabel, Value
 from transformers import BertTokenizer, BertForNextSentencePrediction, AdamW, TrainingArguments, Trainer, \
@@ -21,6 +22,16 @@ MODEL_INFO = {'baseline': {'base_model': 'bert-base-uncased',
                                             '../model/derived_embed/checkpoint-'],
                              'model_dir': 'full_model'}
               }
+
+
+class DenseModel(nn.Module):
+
+    def __init__(self, embed_size, num_classes):
+        super().__init__()
+        self.dense = torch.nn.Linear(embed_size, num_classes)
+
+    def forward(self, x):
+        return self.dense(x)
 
 
 def compute_metrics(eval_pred):
