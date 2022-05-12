@@ -46,8 +46,8 @@ class NeuralNet(nn.Module):
 
     def forward(self, x):
         out = self.fc1(x)
-        out = self.softmax(out)
         out = self.relu(out)
+        out = self.softmax(out)
         out = self.fc2(out)
         return out
 
