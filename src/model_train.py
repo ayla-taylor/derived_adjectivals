@@ -13,6 +13,9 @@ from model_utils import compute_metrics, MODEL_INFO, make_datasets
 parser = argparse.ArgumentParser(description="Train the various models")
 parser.add_argument('--model', type=str, default='baseline',
                     help='which model is this preprocessing for (default baseline)')
+parser.add_argument('--baseline_checkpoint', type=str, help='the number of the checkpoint for the baseline model')
+parser.add_argument('--embed_checkpoint', type=str, help='the number of the checkpoint for the embed model')
+
 # parser.add_argument('--from_scratch', action='store_true', default=False, help='train all models from scratch')
 parser.add_argument('--lr', type=int, default=2e-5, help='learning rate')
 parser.add_argument('--epochs', type=int, default=5, help='number of training epochs')
@@ -76,6 +79,9 @@ def train_full_model(model_dict: dict) -> None:
 
     print('initializing models and tokenizers....')
     baseline_model_name, embed_model_name = model_dict['base_model']
+    baseline_model_name = baseline_model_name + args.baseline_checkpoint
+    embed_model_name = embed_model_name + args.embed_checkpoint
+
     baseline_tokenizer = BertTokenizer.from_pretrained(baseline_model_name)
     baseline_model = BertModel.from_pretrained(baseline_model_name)
 
