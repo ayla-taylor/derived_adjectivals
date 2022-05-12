@@ -77,10 +77,10 @@ for epoch in range(num_epochs):
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-
-        if (i + 1) % 100 == 0:
-            print('Epoch [{}/{}], Step [{}], Loss: {:.4f}'
-                  .format(epoch + 1, num_epochs, i + 1, loss.item()))
+        #
+        # if (i + 1) % 100 == 0:
+        print('Epoch [{}/{}], Step [{}], Loss: {:.4f}'
+              .format(epoch + 1, num_epochs, i + 1, loss.item()))
 
 # Test the model
 # In test phase, we don't need to compute gradients (for memory efficiency)
