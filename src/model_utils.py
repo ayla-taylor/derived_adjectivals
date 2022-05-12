@@ -17,8 +17,8 @@ MODEL_INFO = {'baseline': {'base_model': 'bert-base-uncased',
                            'model_dir': 'baseline_model'},
               'derived_embed': {'base_model': 'bert-base-uncased',
                                 'model_dir': 'derived_embed'},
-              'full_model': {'base_model': ['../model/baseline_model/checkpoint-355',
-                                            '../model/derived_embed/checkpoint-70'],
+              'full_model': {'base_model': ['../model/baseline_model/checkpoint-213',
+                                            '../model/derived_embed/checkpoint-42'],
                              'model_dir': 'full_model'}
               }
 

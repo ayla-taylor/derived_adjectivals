@@ -1,5 +1,7 @@
 import argparse
 from typing import Any
+
+import pandas as pd
 import torch
 from torch.utils.data import DataLoader
 from transformers import TrainingArguments, Trainer, AutoTokenizer, AutoModelForNextSentencePrediction, \
@@ -62,54 +64,82 @@ def train_model_part(model_dict: dict):
 
 
 def train_full_model(model_dict: dict) -> None:
-    gpu_avaliable = True if torch.cuda.is_available() else False
-    baseline_model_name, embed_model_name = model_dict['model']
-    # baseline_tokenizer = BertTokenizer.from_pretrained(baseline_model_name)
-    # embed_tokenizer = BertTokenizer.from_pretrained(embed_model_name)
-    inputs_base, inputs_embeds = model_dict['tokenized_datasets']['train']
-    baseline_outputs = baseline_model_name(**inputs_base)
-    embed_outputs = embed_model_name(**inputs_embeds)
-    print(baseline_outputs.size)
-    print(embed_outputs.size)
+    # for split in ['train', 'dev', 'test']:
+    # gpu_avaliable = True if torch.cuda.is_available() else False
+    train_file = '../data/full_model/train.csv'
+    dev_file = '../data/full_model/dev.csv'
+    train_df = pd.read_csv(train_file)
+    dev_df = pd.read_csv(dev_file)
+    train_text1 = train_df['text1'].tolist()
+    train_text2 = train_df['text2'].tolist()
+    train_derived_pairs = train_df['text2'].tolist()
+
+    print('initializing models and tokenizers....')
+    baseline_model_name, embed_model_name = model_dict['base_model']
+    baseline_tokenizer = BertTokenizer.from_pretrained(baseline_model_name)
+    baseline_model = BertModel.from_pretrained(baseline_model_name)
+
+    embed_tokenizer = BertTokenizer.from_pretrained(embed_model_name)
+    embed_model = BertModel.from_pretrained(embed_model_name)
+
+    print("tokenixing...")
+    inputs_base = baseline_tokenizer(train_text1, train_text2, padding=True, truncation=True, return_tensors='pt')
+    inputs_embeds = embed_tokenizer(train_derived_pairs, padding=True, truncation=True, return_tensors='pt')
+    # inputs_base, inputs_embeds = model_dict['tokenized_datasets']['train']
+    print(inputs_base['input_ids'].shape, inputs_base['token_type_ids'].shape, inputs_base['attention_mask'].shape)
+    print(inputs_embeds['input_ids'].shape, inputs_embeds['token_type_ids'].shape, inputs_embeds['attention_mask'].shape)
+
+    print("predicting baseline...")
+    baseline_outputs = baseline_model(**inputs_base)
+    # baseline_last_hidden = baseline_outputs.last_hidden_state
+    #
+    # print("predicticing embedding...")
+    # embed_outputs = embed_model(**inputs_embeds)
+    # embed_last_hidden = embed_outputs.last_hidden_state
+    #
+    # print(baseline_last_hidden.size)
+    # print(embed_last_hidden.size)
 
 
-#     baseline =
-#     tokeni =
+#     dense_layer = torch.nn.Linear()
 
 
 def main():
     model_name = args.model
     assert model_name in set(MODEL_INFO.keys()), "Invalid model name"  # make sure it is a valid model name
     model_dict = MODEL_INFO[model_name]
-    if model_name != 'full_model':
-        model_dict['tokenizer'] = BertTokenizer.from_pretrained(model_dict['base_model'])
-    else:
-        model_dict['tokenizer'] = []
-        model_dict['model'] = []
-        for base_model in model_dict['base_model']:
-            model_dict['tokenizer'].append(AutoTokenizer.from_pretrained(base_model))
-            model_dict['model'].append(BertModel.from_pretrained(base_model))
-    if model_name == 'baseline':
-        model_dict['model'] = AutoModelForNextSentencePrediction.from_pretrained(model_dict['base_model'])
-    elif model_name == 'derived_embed':
-        model_dict['model'] = BertForSequenceClassification.from_pretrained(model_dict['base_model'])
-
-    filedir = model_dict['model_dir'] + '/'
-
-    if model_name == 'baseline' or model_name == 'full_model':
-        model_dict['dataset'] = load_dataset('csv', data_files={'train': DATAPATH + filedir + 'train.csv',
-                                                                'dev': DATAPATH + filedir + 'dev.csv',
-                                                                'test': DATAPATH + filedir + 'test.csv'})
-    elif model_name == 'derived_embed':
-        model_dict['dataset'] = load_dataset('csv', data_files=DATAPATH + filedir + 'embedding_train.csv')
-    model_dict['tokenized_datasets'] = {}
-    for name, data in model_dict['dataset'].items():
-        model_dict['tokenized_datasets'][name] = make_datasets((name, data), model_dict['tokenizer'], args.max_len,
-                                                               model_name)
     if model_name == 'full_model':
         train_full_model(model_dict)
+        # model_dict['tokenizer'] = []
+        # model_dict['model'] = []
+        # for base_model in model_dict['base_model']:
+        #     model_dict['tokenizer'].append(AutoTokenizer.from_pretrained(base_model))
+        #     model_dict['model'].append(BertModel.from_pretrained(base_model)
     else:
-        train_model_part(model_dict)
+
+        model_dict['tokenizer'] = BertTokenizer.from_pretrained(model_dict['base_model'])
+
+        if model_name == 'baseline':
+            model_dict['model'] = AutoModelForNextSentencePrediction.from_pretrained(model_dict['base_model'])
+        elif model_name == 'derived_embed':
+            model_dict['model'] = BertForSequenceClassification.from_pretrained(model_dict['base_model'])
+
+        filedir = model_dict['model_dir'] + '/'
+
+        if model_name == 'baseline':
+            model_dict['dataset'] = load_dataset('csv', data_files={'train': DATAPATH + filedir + 'train.csv',
+                                                                    'dev': DATAPATH + filedir + 'dev.csv',
+                                                                    'test': DATAPATH + filedir + 'test.csv'})
+        elif model_name == 'derived_embed':
+            model_dict['dataset'] = load_dataset('csv', data_files=DATAPATH + filedir + 'embedding_train.csv')
+        model_dict['tokenized_datasets'] = {}
+        for name, data in model_dict['dataset'].items():
+            model_dict['tokenized_datasets'][name] = make_datasets((name, data), model_dict['tokenizer'], args.max_len,
+                                                                   model_name)
+        if model_name == 'full_model':
+            train_full_model(model_dict)
+        else:
+            train_model_part(model_dict)
 
 
 if __name__ == '__main__':
