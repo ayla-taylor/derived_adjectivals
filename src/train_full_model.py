@@ -127,6 +127,7 @@ with torch.no_grad():
         pred_labels.extend(predicted.data)
         total += batched_labels.size(0)
         correct += (predicted == batched_labels).sum().item()
-
+    accuracy = correct / total
+    print('accuracy: {} %'.format(100 * accuracy))
     f1_score = scores.f_measure(set(labels.data), set(pred_labels))
     print('f1: {} %'.format(100 * f1_score))
