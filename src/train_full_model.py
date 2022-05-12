@@ -52,25 +52,25 @@ class NeuralNet(nn.Module):
         return out
 
 
-# def f1_score(gold_labels, pred_labels):
-#     tp = 0
-#     fp = 0
-#     fn = 0
-#
-#     for i, j in zip(gold_labels, pred_labels):
-#         print(i.shape)
-#         print(j.shape)
-#         if i == j:
-#             tp += 1
-#         elif i == 0 and j == 1:
-#             fp += 1
-#         elif i == 1 and j == 0:
-#             fn += 1
-#
-#     prec = tp / (tp + fp)
-#     recall = tp / (tp + fn)
-#     f1 = 2 * prec * recall / (prec + recall)
-#     return f1
+def f1_score(gold_labels, pred_labels):
+    tp = 0
+    fp = 0
+    fn = 0
+
+    for i, j in zip(gold_labels, pred_labels):
+        print(i.shape)
+        print(j.shape)
+        if i == j:
+            tp += 1
+        elif i == 0 and j == 1:
+            fp += 1
+        elif i == 1 and j == 0:
+            fn += 1
+
+    prec = tp / (tp + fp)
+    recall = tp / (tp + fn)
+    f1 = 2 * prec * recall / (prec + recall)
+    return f1
 
 
 labels = torch.load('labels.pt')
@@ -162,5 +162,5 @@ with torch.no_grad():
     print('total:', total)
     accuracy = correct / total
     print('accuracy: {} %'.format(100 * accuracy))
-    # f1_scored = f1_score(labels.data, pred_labels)
-    # print('f1: {} %'.format(100 * f1_scored))
+    f1_scored = f1_score(labels.data, pred_labels)
+    print('f1: {} %'.format(100 * f1_scored))
