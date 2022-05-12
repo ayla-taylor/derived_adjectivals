@@ -108,7 +108,7 @@ def train_full_model(model_dict: dict) -> None:
 
     new_embed = torch.concat((baseline_last_hidden, embed_last_hidden), 1)
     print(new_embed.shape)
-    dense_layer = torch.nn.Linear(new_embed.shape[1], 2)
+    dense_layer = torch.nn.Linear(new_embed.shape[2], 2)
 
     logits = dense_layer(new_embed)
     print(logits)
