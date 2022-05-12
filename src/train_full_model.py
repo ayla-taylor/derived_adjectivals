@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-
+from sklearn.metrics import f1_score
 
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -12,6 +12,7 @@ num_classes = 2
 num_epochs = 5
 batch_size = 32
 learning_rate = 0.001
+
 
 # MNIST dataset
 # train_dataset = torchvision.datasets.MNIST(root='../../data',
@@ -46,6 +47,7 @@ class NeuralNet(nn.Module):
         out = self.relu(out)
         out = self.fc2(out)
         return out
+
 
 labels = torch.load('labels.pt')
 inputs = torch.load('embed.pt')
@@ -110,13 +112,17 @@ inputs = inputs.to(device)
 with torch.no_grad():
     correct = 0
     total = 0
+    pred_labels = []
+
     for i in range(0, labels.shape[0], batch_size):
         batched_inputs = inputs[i: i + batch_size]
         batched_labels = labels[i: i + batch_size]
         # images = images.reshape(-1, 28 * 28).to(device)
         outputs = model(batched_inputs)
         _, predicted = torch.max(outputs.data, 1)
+        pred_labels.extend(predicted.data)
         total += batched_labels.size(0)
         correct += (predicted == batched_labels).sum().item()
 
-    print('Accuracy: {} %'.format(100 * correct / total))
+    f1_score = f1_score(labels.data, pred_labels)
+    print('f1: {} %'.format(100 * f1_score))
