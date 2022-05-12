@@ -86,7 +86,7 @@ def train_full_model(model_dict: dict) -> None:
         else:
             label_list.append([0, 1])
     labels = torch.tensor(label_list)
-    torch.save(labels, 'labels.pt')
+    torch.save(label_1d, 'labels.pt')
 
     eval_file = '../data/full_model/dev.csv'
     eval_df = pd.read_csv(eval_file)
@@ -94,7 +94,7 @@ def train_full_model(model_dict: dict) -> None:
     eval_text2 = eval_df['text2'].tolist()
     eval_derived_pairs = eval_df['text2'].tolist()
     eval_label_1d = torch.tensor(eval_df['label'])
-    # torch.save(label_1d, 'labels.pt')
+    torch.save(eval_label_1d, 'eval_labels.pt')
     eval_label_list = []
     for label in eval_df['label']:
         if label == 0:
@@ -102,7 +102,7 @@ def train_full_model(model_dict: dict) -> None:
         else:
             eval_label_list.append([0, 1])
     eval_labels = torch.tensor(eval_label_list)
-    torch.save(eval_labels, 'eval_labels.pt')
+    # torch.save(eval_labels, 'eval_labels.pt')
 
     print('initializing models and tokenizers....')
     baseline_model_name, embed_model_name = model_dict['base_model']
