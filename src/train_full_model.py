@@ -144,16 +144,16 @@ with torch.no_grad():
 
     for i in range(0, labels.shape[0], batch_size):
         batched_inputs = inputs[i: i + batch_size]
-        batched_labels = labels[i: i + batch_size]
+        batched_labels = labels[i: i + batch_size].float()
         # images = images.reshape(-1, 28 * 28).to(device)
         outputs = model(batched_inputs)
         # _, predicted = torch.max(outputs.data, 1)
-        print(outputs.data.shape)
-        print(outputs.data)
+        # print(outputs.data.shape)
+        # print(outputs.data)
         predicted = torch.argmax(outputs.data, 1)
-        # print(predicted.shape)
+        print(predicted.shape)
         # print(predicted.data)
-        # print(batched_labels)
+        print(batched_labels.shape)
         pred_labels.extend(predicted.data)
         # print((predicted == batched_labels).sum())
         total += batched_labels.size(0)
