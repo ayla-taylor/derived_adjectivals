@@ -133,6 +133,8 @@ def train_full_model(model_dict: dict) -> None:
     baseline_last_hidden = baseline_outputs.last_hidden_state
     batch_size = baseline_last_hidden.shape[0]
     squished_basedline_hidden = baseline_last_hidden.reshape(batch_size, -1)
+    print(baseline_last_hidden.shape)
+    print(squished_basedline_hidden.shape)
 
     print("predicticing embedding...")
     embed_outputs = embed_model(**inputs_embeds)
@@ -140,8 +142,8 @@ def train_full_model(model_dict: dict) -> None:
     batch_size = embed_last_hidden.shape[0]
     squished_embed_hidden = embed_last_hidden.reshape(batch_size, -1)
 
-    print(baseline_last_hidden.shape)
     print(embed_last_hidden.shape)
+    print(squished_embed_hidden.shape)
 
     inputs = torch.concat((squished_basedline_hidden, squished_embed_hidden), 1)
     torch.save(inputs, 'embed.pt')
@@ -152,14 +154,16 @@ def train_full_model(model_dict: dict) -> None:
     eval_baseline_last_hidden = eval_baseline_outputs.last_hidden_state
     batch_size = eval_baseline_last_hidden.shape[0]
     eval_squished_basedline_hidden = eval_baseline_last_hidden.reshape(batch_size, -1)
+    print(eval_baseline_last_hidden.shape)
+    print(eval_squished_basedline_hidden.shape)
 
-    # print("predicticing embedding...")
+    print("predicticing embedding...")
     eval_embed_outputs = embed_model(**eval_inputs_embeds)
     eval_embed_last_hidden = eval_embed_outputs.last_hidden_state
     batch_size = eval_embed_last_hidden.shape[0]
     eval_squished_embed_hidden = eval_embed_last_hidden.reshape(batch_size, -1)
-    # print(baseline_last_hidden.shape)
-    # print(embed_last_hidden.shape)
+    print(eval_embed_last_hidden.shape)
+    print(eval_squished_embed_hidden.shape)
 
     eval_inputs = torch.concat((eval_squished_basedline_hidden, eval_squished_embed_hidden), 1)
     print(eval_inputs.shape)
