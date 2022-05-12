@@ -147,6 +147,8 @@ def train_full_model(model_dict: dict) -> None:
 
     inputs = torch.concat((squished_basedline_hidden, squished_embed_hidden), 1)
     torch.save(inputs, 'embed.pt')
+    print(inputs.shape)
+
 
 
     print("predicting baseline...")
@@ -167,7 +169,6 @@ def train_full_model(model_dict: dict) -> None:
 
     eval_inputs = torch.concat((eval_squished_basedline_hidden, eval_squished_embed_hidden), 1)
     print(eval_inputs.shape)
-    print(eval_label_1d.shape)
     torch.save(eval_inputs, 'eval_embed.pt')
     # model = DenseModel(inputs.shape[2], 2)
     #
