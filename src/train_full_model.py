@@ -143,7 +143,7 @@ with torch.no_grad():
         outputs = model(batched_inputs)
         _, predicted = torch.max(outputs.data, 1)
         # print(predicted.shape)
-        print(predicted.data.shape)
+        print(predicted.data)
         # print(labels.shape)
         pred_labels.extend(predicted.data)
         # print((predicted == batched_labels).sum())
