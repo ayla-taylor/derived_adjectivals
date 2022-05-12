@@ -101,7 +101,7 @@ def train_full_model(model_dict: dict) -> None:
             eval_label_list.append([1, 0])
         else:
             eval_label_list.append([0,1])
-    eval_labels = torch.tensor(label_list)
+    eval_labels = torch.tensor(eval_label_list)
     torch.save(eval_labels, 'eval_labels.pt')
 
 
@@ -156,6 +156,7 @@ def train_full_model(model_dict: dict) -> None:
 
     eval_inputs = torch.concat((eval_baseline_last_hidden, eval_embed_last_hidden), 1)
     print(eval_inputs.shape)
+    print(eval_label_1d.shape)
     torch.save(eval_inputs, 'eval_embed.pt')
     # model = DenseModel(inputs.shape[2], 2)
     #
