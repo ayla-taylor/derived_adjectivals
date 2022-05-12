@@ -114,9 +114,9 @@ with torch.no_grad():
         batched_inputs = inputs[i: i + batch_size]
         batched_labels = labels[i: i + batch_size]
         # images = images.reshape(-1, 28 * 28).to(device)
-        outputs = model(inputs)
+        outputs = model(batched_inputs)
         _, predicted = torch.max(outputs.data, 1)
-        total += labels.size(0)
-        correct += (predicted == labels).sum().item()
+        total += batched_labels.size(0)
+        correct += (predicted == batched_labels).sum().item()
 
     print('Accuracy: {} %'.format(100 * correct / total))
