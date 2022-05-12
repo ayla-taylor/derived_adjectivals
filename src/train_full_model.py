@@ -143,7 +143,7 @@ with torch.no_grad():
         batched_labels = labels[i: i + batch_size]
         # images = images.reshape(-1, 28 * 28).to(device)
         outputs = model(batched_inputs)
-        _, predicted = torch.argmax(outputs.data, 1)
+        predicted = torch.argmax(outputs.data, 1)
         # print(predicted.shape)
         # print(predicted.data)
         print(batched_labels)
