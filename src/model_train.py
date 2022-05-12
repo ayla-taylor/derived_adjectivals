@@ -103,8 +103,8 @@ def train_full_model(model_dict: dict) -> None:
     embed_outputs = embed_model(**inputs_embeds)
     embed_last_hidden = embed_outputs.last_hidden_state
 
-    print(baseline_last_hidden.size)
-    print(embed_last_hidden.size)
+    print(baseline_last_hidden.shape)
+    print(embed_last_hidden.shape)
 
 
 #     dense_layer = torch.nn.Linear()
