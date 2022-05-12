@@ -121,27 +121,27 @@ def train_full_model(model_dict: dict) -> None:
     inputs = torch.concat((baseline_last_hidden, embed_last_hidden), 1)
     torch.save(inputs, 'embed.pt')
 
-    model = DenseModel(inputs.shape[2], 2)
-
-    loss = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=args.lr)
-
-    running_loss = 0.0
-    for epoch in tqdm(range(args.epochs)):
-
-        # zero the parameter gradients
-        optimizer.zero_grad()
-
-        # forward + backward + optimize
-        outputs = model(inputs)
-        l = loss(outputs, labels)
-        l.backward()
-        optimizer.step()
-
-        # print statistics
-        running_loss += l.item()
-        # f1 = compute_metrics(outputs, lable_1d)
-        # print("f1:", f1, 'loss:', loss.item())
+    # model = DenseModel(inputs.shape[2], 2)
+    #
+    # loss = nn.CrossEntropyLoss()
+    # optimizer = optim.SGD(model.parameters(), lr=args.lr)
+    #
+    # running_loss = 0.0
+    # for epoch in tqdm(range(args.epochs)):
+    #
+    #     # zero the parameter gradients
+    #     optimizer.zero_grad()
+    #
+    #     # forward + backward + optimize
+    #     outputs = model(inputs)
+    #     l = loss(outputs, labels)
+    #     l.backward()
+    #     optimizer.step()
+    #
+    #     # print statistics
+    #     running_loss += l.item()
+    #     # f1 = compute_metrics(outputs, lable_1d)
+    #     # print("f1:", f1, 'loss:', loss.item())
 
 
 def main():
