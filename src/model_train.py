@@ -77,7 +77,8 @@ def train_full_model(model_dict: dict) -> None:
     text1 = df['text1'].tolist()
     text2 = df['text2'].tolist()
     derived_pairs = df['text2'].tolist()
-    lable_1d = torch.tensor(df['label'])
+    label_1d = torch.tensor(df['label'])
+    torch.save(label_1d, 'labels.pt')
     label_list = []
     for label in df['label']:
         if label == 0:
@@ -109,7 +110,7 @@ def train_full_model(model_dict: dict) -> None:
     print("predicting baseline...")
     baseline_outputs = baseline_model(**inputs_base)
     baseline_last_hidden = baseline_outputs.last_hidden_state
-    #
+
     # print("predicticing embedding...")
     embed_outputs = embed_model(**inputs_embeds)
     embed_last_hidden = embed_outputs.last_hidden_state
@@ -118,6 +119,7 @@ def train_full_model(model_dict: dict) -> None:
     print(embed_last_hidden.shape)
 
     inputs = torch.concat((baseline_last_hidden, embed_last_hidden), 1)
+    torch.save(inputs, 'embed.pt')
 
     model = DenseModel(inputs.shape[2], 2)
 
