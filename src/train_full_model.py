@@ -41,10 +41,12 @@ class NeuralNet(nn.Module):
         super(NeuralNet, self).__init__()
         self.fc1 = nn.Linear(input_size, hidden_size)
         self.relu = nn.ReLU()
+        self.softmax = nn.Softmax()
         self.fc2 = nn.Linear(hidden_size, num_classes)
 
     def forward(self, x):
         out = self.fc1(x)
+        out = self.softmax(out)
         out = self.relu(out)
         out = self.fc2(out)
         return out
@@ -141,7 +143,7 @@ with torch.no_grad():
         batched_labels = labels[i: i + batch_size]
         # images = images.reshape(-1, 28 * 28).to(device)
         outputs = model(batched_inputs)
-        _, predicted = torch.max(outputs.data, 1)
+        _, predicted = torch.argmax(outputs.data, 1)
         # print(predicted.shape)
         # print(predicted.data)
         print(batched_labels)
