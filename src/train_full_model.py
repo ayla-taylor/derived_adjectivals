@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
-from sklearn import metrics
+# from sklearn import metrics
+from nltk.metrics import scores
 
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -124,5 +125,5 @@ with torch.no_grad():
         total += batched_labels.size(0)
         correct += (predicted == batched_labels).sum().item()
 
-    f1_score = metrics.f1_score(labels.data, pred_labels)
+    f1_score = scores.f_measure(set(labels.data), set(pred_labels))
     print('f1: {} %'.format(100 * f1_score))
