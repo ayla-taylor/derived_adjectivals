@@ -56,6 +56,8 @@ def f1_score(gold_labels, pred_labels):
     fn = 0
 
     for i, j in zip(gold_labels, pred_labels):
+        print(i.shape)
+        print(j.shape)
         if i == j:
             tp += 1
         elif i == 0 and j == 1:
