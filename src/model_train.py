@@ -156,7 +156,7 @@ def train_full_model(model_dict: dict) -> None:
 
     eval_inputs = torch.concat((eval_baseline_last_hidden, eval_embed_last_hidden), 1)
     print(eval_inputs.shape)
-    torch.save(eval_inputs, 'embed.pt')
+    torch.save(eval_inputs, 'eval_embed.pt')
     # model = DenseModel(inputs.shape[2], 2)
     #
     # loss = nn.CrossEntropyLoss()
