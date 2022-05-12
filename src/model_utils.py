@@ -35,6 +35,8 @@ class DenseModel(nn.Module):
 
 
 def compute_metrics(predictions, labels):
+    print(predictions)
+    print(predictions.shape)
     predictions = np.argmax(predictions, axis=1)
     return F1_METRIC.compute(predictions=predictions, references=labels, average='micro')
 
