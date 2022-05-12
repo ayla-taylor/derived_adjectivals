@@ -50,6 +50,9 @@ class NeuralNet(nn.Module):
 labels = torch.load('labels.pt')
 inputs = torch.load('embed.pt')
 
+labels = labels.to(device)
+inputs = inputs.to(device)
+
 model = NeuralNet(input_size, hidden_size, num_classes).to(device)
 
 # Loss and optimizer
@@ -64,7 +67,7 @@ for epoch in range(num_epochs):
         batched_labels = labels[i: i + batch_size]
         # Move tensors to the configured device
         # inputs = inputs.reshape(-1, 28 * 28).to(device)
-        batched_labels = batched_labels.to(device)
+        # batched_labels = batched_labels.to(device)
 
         # Forward pass
         outputs = model(batched_inputs)
