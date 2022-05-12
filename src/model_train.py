@@ -84,7 +84,7 @@ def train_full_model(model_dict: dict) -> None:
         if label == 0:
             label_list.append([1, 0])
         else:
-            label_list.append([0,1])
+            label_list.append([0, 1])
     labels = torch.tensor(label_list)
     torch.save(labels, 'labels.pt')
 
@@ -100,10 +100,9 @@ def train_full_model(model_dict: dict) -> None:
         if label == 0:
             eval_label_list.append([1, 0])
         else:
-            eval_label_list.append([0,1])
+            eval_label_list.append([0, 1])
     eval_labels = torch.tensor(eval_label_list)
     torch.save(eval_labels, 'eval_labels.pt')
-
 
     print('initializing models and tokenizers....')
     baseline_model_name, embed_model_name = model_dict['base_model']
@@ -117,12 +116,16 @@ def train_full_model(model_dict: dict) -> None:
     embed_model = BertModel.from_pretrained(embed_model_name)
 
     print("tokenixing...")
-    inputs_base = baseline_tokenizer(text1, text2, padding=True, truncation=True, max_length=120, return_tensors='pt')
-    inputs_embeds = embed_tokenizer(derived_pairs, padding=True, truncation=True, max_length=15, return_tensors='pt')
+    inputs_base = baseline_tokenizer(text1, text2, pad_to_max_length=True, truncation=True, max_length=120,
+                                     return_tensors='pt')
+    inputs_embeds = embed_tokenizer(derived_pairs, pad_to_max_length=True, truncation=True, max_length=15,
+                                    return_tensors='pt')
 
     print("tokenixing...")
-    eval_inputs_base = baseline_tokenizer(eval_text1, eval_text2, padding=True, truncation=True, max_length=120, return_tensors='pt')
-    eval_inputs_embeds = embed_tokenizer(eval_derived_pairs, padding=True, truncation=True, max_length=15, return_tensors='pt')
+    eval_inputs_base = baseline_tokenizer(eval_text1, eval_text2, pad_to_max_length=True, truncation=True, max_length=120,
+                                          return_tensors='pt')
+    eval_inputs_embeds = embed_tokenizer(eval_derived_pairs, pad_to_max_length=True, truncation=True, max_length=15,
+                                         return_tensors='pt')
 
     # inputs_base, inputs_embeds = model_dict['tokenized_datasets']['train']
     # print(inputs_base['input_ids'].shape, inputs_base['token_type_ids'].shape, inputs_base['attention_mask'].shape)
@@ -148,8 +151,6 @@ def train_full_model(model_dict: dict) -> None:
     inputs = torch.concat((squished_basedline_hidden, squished_embed_hidden), 1)
     torch.save(inputs, 'embed.pt')
     print(inputs.shape)
-
-
 
     print("predicting baseline...")
     eval_baseline_outputs = baseline_model(**eval_inputs_base)
