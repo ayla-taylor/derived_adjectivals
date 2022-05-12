@@ -47,19 +47,26 @@ def process_model_files(datafiles: list[str], sense_dict: dict) -> None:
                             sentence_dict['derived_pair'] = get_head(data_sentence, target_word)
                         sentence_dicts.append(sentence_dict)
     random.shuffle(sentence_dicts)
-    models_sentences = sentence_dicts[:int(len(sentence_dicts)/2)], sentence_dicts[int(len(sentence_dicts)/2):]
-    for sent in models_sentences[1]:
-        sent['text1'] = sent['derived_pair'] + ' | ' + sent['text1']
+    baseline_sents, full_sents = sentence_dicts[:int(len(sentence_dicts)/2)], sentence_dicts[int(len(sentence_dicts)/2):]
+#    for sent in models_sentences[1]:
+#        sent['text1'] = sent['derived_pair'] + ' | ' + sent['text1']
     split_for_each_model = []
-    for model in models_sentences:
-        train = pd.DataFrame(model[:int(len(model) * .8)], columns=['text1', 'text2', 'label'])
-        dev = pd.DataFrame(model[int(len(model) * .8):int(len(sentence_dicts) * .9)],
-                           columns=['text1', 'text2', 'label'])
-        test = pd.DataFrame(model[-int(len(model) * .1):], columns=['text1', 'text2', 'label'])
-        split_for_each_model.append({'train': train, 'dev': dev, 'test': test})
+
+    train = pd.DataFrame(baseline_sents[:int(len(baseline_sents) * .8)], columns=['text1', 'text2', 'label'])
+    dev = pd.DataFrame(baseline_sents[int(len(baseline_sents) * .8):int(len(sentence_dicts) * .9)],
+                       columns=['text1', 'text2', 'label'])
+    test = pd.DataFrame(baseline_sents[-int(len(baseline_sents) * .1):], columns=['text1', 'text2', 'label'])
+    split_for_each_model.append({'train': train, 'dev': dev, 'test': test})
+
+    train = pd.DataFrame(full_sents[:int(len(full_sents) * .8)], columns=['text1', 'text2', 'derived_pair', 'label'])
+    dev = pd.DataFrame(full_sents[int(len(full_sents) * .8):int(len(sentence_dicts) * .9)],
+                       columns=['text1', 'text2', 'derived_pair', 'label'])
+    test = pd.DataFrame(full_sents[-int(len(full_sents) * .1):], columns=['text1', 'text2', 'derived_pair', 'label'])
+    split_for_each_model.append({'train': train, 'dev': dev, 'test': test})
+
     baseline_split, fullmodel_split = split_for_each_model
     for split_name, split_df in baseline_split.items():
-        split_df.to_csv('../data/baseline/' + split_name + '.csv', index=False)
+        split_df.to_csv('../data/baseline_model/' + split_name + '.csv', index=False)
     for split_name, split_df in fullmodel_split.items():
         split_df.to_csv('../data/full_model/' + split_name + '.csv', index=False)
 

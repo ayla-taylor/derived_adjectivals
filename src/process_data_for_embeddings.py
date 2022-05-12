@@ -4,14 +4,14 @@ import spacy
 import random
 
 DATAFILES = ['cooled-annotation-2_annotations.json', 'blackened-annotation_annotations.json']
-SENSE_DICT = {'cooled': {'Sense 1': 'cool_1',
-                       'Sense 2': 'cool_2'},
-              'hardened': {'Sense 1': 'hard_1',
-                       'Sense 2': 'hard_2',
-                       'Sense 3': 'hard_3'},
-              'blackened': {'Sense 1': 'black_1',
-                        'Sense 2': 'black_2',
-                        'Sense 3': 'black_3'},
+SENSE_DICT = {'cooled': {'Sense 1': '0',
+                         'Sense 2': '1'},
+              'hardened': {'Sense 1': '0',
+                           'Sense 2': '1',
+                           'Sense 3': '0'},
+              'blackened': {'Sense 1': '0',
+                            'Sense 2': '1',
+                            'Sense 3': '0'},
               }
 
 spacy_nlp = spacy.load("en_core_web_sm",
@@ -81,7 +81,7 @@ def main():
     random.shuffle(sentence_dicts)
     train = pd.DataFrame(sentence_dicts, columns=['text', 'label'])
 
-    train.to_csv('../data/embedding_train.csv', index=False)
+    train.to_csv('../data/derived_embed/embedding_train.csv', index=False)
 
 
 if __name__ == '__main__':
