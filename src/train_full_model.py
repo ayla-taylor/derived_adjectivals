@@ -146,7 +146,7 @@ with torch.no_grad():
         # print(predicted.data.shape)
         # print(labels.shape)
         pred_labels.extend(predicted.data)
-        print(predicted == batched_labels.sum().item)
+        print((predicted == batched_labels).sum().item)
         total += batched_labels.size(0)
         correct += (predicted == batched_labels).sum().item()
     print('correct:', correct)
