@@ -3,12 +3,14 @@ from typing import Any
 
 import pandas as pd
 import torch
-from torch.utils.data import DataLoader
+import torch.nn as nn
+import torch.optim as optim
+from tqdm import tqdm
 from transformers import TrainingArguments, Trainer, AutoTokenizer, AutoModelForNextSentencePrediction, \
     AutoModelForSequenceClassification, BertModel, BertTokenizer, BertForSequenceClassification
 from datasets import load_dataset
 
-from model_utils import compute_metrics, MODEL_INFO, make_datasets
+from model_utils import compute_metrics, MODEL_INFO, make_datasets, DenseModel
 
 parser = argparse.ArgumentParser(description="Train the various models")
 parser.add_argument('--model', type=str, default='baseline',
@@ -69,13 +71,13 @@ def train_model_part(model_dict: dict):
 def train_full_model(model_dict: dict) -> None:
     # for split in ['train', 'dev', 'test']:
     # gpu_avaliable = True if torch.cuda.is_available() else False
-    train_file = '../data/full_model/train.csv'
-    dev_file = '../data/full_model/dev.csv'
-    train_df = pd.read_csv(train_file)
-    dev_df = pd.read_csv(dev_file)
-    train_text1 = train_df['text1'].tolist()
-    train_text2 = train_df['text2'].tolist()
-    train_derived_pairs = train_df['text2'].tolist()
+    datafile = '../data/full_model/train.csv'
+    eval_file = '../data/full_model/dev.csv'
+    df = pd.read_csv(datafile)
+    text1 = df['text1'].tolist()
+    text2 = df['text2'].tolist()
+    derived_pairs = df['text2'].tolist()
+    labels = torch.tensor(df['labels'])
 
     print('initializing models and tokenizers....')
     baseline_model_name, embed_model_name = model_dict['base_model']
@@ -89,8 +91,10 @@ def train_full_model(model_dict: dict) -> None:
     embed_model = BertModel.from_pretrained(embed_model_name)
 
     print("tokenixing...")
-    inputs_base = baseline_tokenizer(train_text1, train_text2, padding=True, truncation=True, return_tensors='pt')
-    inputs_embeds = embed_tokenizer(train_derived_pairs, padding=True, truncation=True, return_tensors='pt')
+    inputs_base = baseline_tokenizer(text1, text2, padding=True, truncation=True, return_tensors='pt')
+    inputs_embeds = embed_tokenizer(derived_pairs, padding=True, truncation=True, return_tensors='pt')
+
+
     # inputs_base, inputs_embeds = model_dict['tokenized_datasets']['train']
     # print(inputs_base['input_ids'].shape, inputs_base['token_type_ids'].shape, inputs_base['attention_mask'].shape)
     # print(inputs_embeds['input_ids'].shape, inputs_embeds['token_type_ids'].shape, inputs_embeds['attention_mask'].shape)
@@ -106,12 +110,29 @@ def train_full_model(model_dict: dict) -> None:
     print(baseline_last_hidden.shape)
     print(embed_last_hidden.shape)
 
-    new_embed = torch.concat((baseline_last_hidden, embed_last_hidden), 1)
-    print(new_embed.shape)
-    dense_layer = torch.nn.Linear(new_embed.shape[2], 2)
+    inputs = torch.concat((baseline_last_hidden, embed_last_hidden), 1)
 
-    logits = dense_layer(new_embed)
-    print(logits)
+    model = DenseModel(inputs.shape[2], 2)
+
+    loss = nn.CrossEntropyLoss()
+    optimizer = optim.SGD(model.parameters(), lr=args.lr)
+
+    running_loss = 0.0
+    for epoch in tqdm(range(args.epochs)):
+
+        # zero the parameter gradients
+        optimizer.zero_grad()
+
+        # forward + backward + optimize
+        outputs = model(inputs)
+        loss = loss(outputs, labels)
+        loss.backward()
+        optimizer.step()
+
+        # print statistics
+        running_loss += loss.item()
+        f1 = compute_metrics(outputs)
+        print("f1:", f1)
 
 
 def main():
