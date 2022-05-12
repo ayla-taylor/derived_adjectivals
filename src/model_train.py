@@ -88,6 +88,22 @@ def train_full_model(model_dict: dict) -> None:
     labels = torch.tensor(label_list)
     torch.save(labels, 'labels.pt')
 
+    eval_file = '../data/full_model/dev.csv'
+    eval_df = pd.read_csv(eval_file)
+    eval_text1 = eval_df['text1'].tolist()
+    eval_text2 = eval_df['text2'].tolist()
+    eval_derived_pairs = eval_df['text2'].tolist()
+    eval_label_1d = torch.tensor(eval_df['label'])
+    # torch.save(label_1d, 'labels.pt')
+    eval_label_list = []
+    for label in eval_df['label']:
+        if label == 0:
+            eval_label_list.append([1, 0])
+        else:
+            eval_label_list.append([0,1])
+    eval_labels = torch.tensor(label_list)
+    torch.save(eval_labels, 'eval_labels.pt')
+
 
     print('initializing models and tokenizers....')
     baseline_model_name, embed_model_name = model_dict['base_model']
@@ -104,6 +120,9 @@ def train_full_model(model_dict: dict) -> None:
     inputs_base = baseline_tokenizer(text1, text2, padding=True, truncation=True, return_tensors='pt')
     inputs_embeds = embed_tokenizer(derived_pairs, padding=True, truncation=True, return_tensors='pt')
 
+    print("tokenixing...")
+    eval_inputs_base = baseline_tokenizer(eval_text1, eval_text2, padding=True, truncation=True, return_tensors='pt')
+    eval_inputs_embeds = embed_tokenizer(eval_derived_pairs, padding=True, truncation=True, return_tensors='pt')
 
     # inputs_base, inputs_embeds = model_dict['tokenized_datasets']['train']
     # print(inputs_base['input_ids'].shape, inputs_base['token_type_ids'].shape, inputs_base['attention_mask'].shape)
@@ -123,6 +142,21 @@ def train_full_model(model_dict: dict) -> None:
     inputs = torch.concat((baseline_last_hidden, embed_last_hidden), 1)
     torch.save(inputs, 'embed.pt')
 
+
+    print("predicting baseline...")
+    eval_baseline_outputs = baseline_model(**eval_inputs_base)
+    eval_baseline_last_hidden = eval_baseline_outputs.last_hidden_state
+
+    # print("predicticing embedding...")
+    eval_embed_outputs = embed_model(**eval_inputs_embeds)
+    eval_embed_last_hidden = eval_embed_outputs.last_hidden_state
+
+    # print(baseline_last_hidden.shape)
+    # print(embed_last_hidden.shape)
+
+    eval_inputs = torch.concat((eval_baseline_last_hidden, eval_embed_last_hidden), 1)
+    print(eval_inputs.shape)
+    torch.save(eval_inputs, 'embed.pt')
     # model = DenseModel(inputs.shape[2], 2)
     #
     # loss = nn.CrossEntropyLoss()
