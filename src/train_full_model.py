@@ -89,7 +89,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 # total_step = len(train_loader)
 for epoch in range(num_epochs):
     for i in range(0, labels.shape[0], batch_size):
-        batched_inputs = inputs[i: i + batch_size]
+        batched_inputs = inputs[i: i + batch_size].float()
         batched_labels = labels[i: i + batch_size]
         # Move tensors to the configured device
         # inputs = inputs.reshape(-1, 28 * 28).to(device)
