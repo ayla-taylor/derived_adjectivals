@@ -77,6 +77,7 @@ def train_full_model(model_dict: dict) -> None:
     text1 = df['text1'].tolist()
     text2 = df['text2'].tolist()
     derived_pairs = df['text2'].tolist()
+    lable_1d = torch.tensor(df['label'])
     label_list = []
     for label in df['label']:
         if label == 0:
@@ -137,8 +138,8 @@ def train_full_model(model_dict: dict) -> None:
 
         # print statistics
         running_loss += loss.item()
-        f1 = compute_metrics(outputs, labels)
-        print("f1:", f1)
+        # f1 = compute_metrics(outputs, lable_1d)
+        # print("f1:", f1, 'loss:', loss.item())
 
 
 def main():
