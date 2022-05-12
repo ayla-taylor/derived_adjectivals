@@ -121,6 +121,8 @@ with torch.no_grad():
         # images = images.reshape(-1, 28 * 28).to(device)
         outputs = model(batched_inputs)
         _, predicted = torch.max(outputs.data, 1)
+        print(predicted.shape)
+        print(type(predicted.data))
         pred_labels.extend(predicted.data)
         total += batched_labels.size(0)
         correct += (predicted == batched_labels).sum().item()
