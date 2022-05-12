@@ -117,12 +117,12 @@ def train_full_model(model_dict: dict) -> None:
     embed_model = BertModel.from_pretrained(embed_model_name)
 
     print("tokenixing...")
-    inputs_base = baseline_tokenizer(text1, text2, padding=125, truncation=True, return_tensors='pt')
-    inputs_embeds = embed_tokenizer(derived_pairs, padding=15, truncation=True, return_tensors='pt')
+    inputs_base = baseline_tokenizer(text1, text2, padding=True, truncation=True, max_length=120, return_tensors='pt')
+    inputs_embeds = embed_tokenizer(derived_pairs, padding=True, truncation=True, max_length=15, return_tensors='pt')
 
     print("tokenixing...")
-    eval_inputs_base = baseline_tokenizer(eval_text1, eval_text2, padding=125, truncation=True, return_tensors='pt')
-    eval_inputs_embeds = embed_tokenizer(eval_derived_pairs, padding=15, truncation=True, return_tensors='pt')
+    eval_inputs_base = baseline_tokenizer(eval_text1, eval_text2, padding=True, truncation=True, max_length=120, return_tensors='pt')
+    eval_inputs_embeds = embed_tokenizer(eval_derived_pairs, padding=True, truncation=True, max_length=15, return_tensors='pt')
 
     # inputs_base, inputs_embeds = model_dict['tokenized_datasets']['train']
     # print(inputs_base['input_ids'].shape, inputs_base['token_type_ids'].shape, inputs_base['attention_mask'].shape)
