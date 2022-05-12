@@ -50,6 +50,25 @@ class NeuralNet(nn.Module):
         return out
 
 
+def f1_score(gold_labels, pred_labels):
+    tp = 0
+    fp = 0
+    fn = 0
+
+    for i, j in zip(gold_labels, pred_labels):
+        if i == j:
+            tp += 1
+        elif i == 0 and j == 1:
+            fp += 1
+        elif i == 1 and j == 0:
+            fn += 1
+
+    prec = tp / (tp + fp)
+    recall = tp / (tp + fn)
+    f1 = 2 * prec * recall / (prec + recall)
+    return f1
+
+
 labels = torch.load('labels.pt')
 inputs = torch.load('embed.pt')
 
@@ -121,15 +140,16 @@ with torch.no_grad():
         # images = images.reshape(-1, 28 * 28).to(device)
         outputs = model(batched_inputs)
         _, predicted = torch.max(outputs.data, 1)
-        print(predicted.shape)
-        print(predicted.data.shape)
-        print(labels.shape)
+        # print(predicted.shape)
+        # print(predicted.data.shape)
+        # print(labels.shape)
         pred_labels.extend(predicted.data)
+        print(predicted == batched_labels.sum().item)
         total += batched_labels.size(0)
         correct += (predicted == batched_labels).sum().item()
     print('correct:', correct)
     print('total:', total)
     accuracy = correct / total
     print('accuracy: {} %'.format(100 * accuracy))
-    f1_score = scores.f_measure(set(labels.data), set(pred_labels))
-    print('f1: {} %'.format(100 * f1_score))
+    f1_scored = f1_score(labels.data, pred_labels)
+    print('f1: {} %'.format(100 * f1_scored))
