@@ -102,7 +102,7 @@ def train_full_model(model_dict: dict) -> None:
         else:
             eval_label_list.append([0,1])
     eval_labels = torch.tensor(eval_label_list)
-    torch.save(eval_label_1d, 'eval_labels.pt')
+    torch.save(eval_labels, 'eval_labels.pt')
 
 
     print('initializing models and tokenizers....')
