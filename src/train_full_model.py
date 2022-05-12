@@ -41,7 +41,7 @@ class NeuralNet(nn.Module):
         super(NeuralNet, self).__init__()
         self.fc1 = nn.Linear(input_size, hidden_size)
         self.relu = nn.ReLU()
-        self.softmax = nn.Softmax(dim=1)
+        self.softmax = nn.Softmax()
         self.fc2 = nn.Linear(hidden_size, num_classes)
 
     def forward(self, x):
@@ -82,7 +82,7 @@ inputs = inputs.to(device)
 model = NeuralNet(input_size, hidden_size, num_classes).to(device)
 
 # Loss and optimizer
-criterion = nn.CrossEntropyLoss()
+criterion = nn.BCEWithLogitsLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 # Train the model
@@ -143,7 +143,8 @@ with torch.no_grad():
         batched_labels = labels[i: i + batch_size]
         # images = images.reshape(-1, 28 * 28).to(device)
         outputs = model(batched_inputs)
-        _, predicted = torch.max(outputs.data, 1)
+        # _, predicted = torch.max(outputs.data, 1)
+        predicted = torch.argmax(outputs.data, 1)
         # print(predicted.shape)
         print(predicted.data)
         # print(batched_labels)
