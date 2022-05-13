@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
-# from sklearn import metrics
-from nltk.metrics import scores
+
 
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

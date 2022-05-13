@@ -8,6 +8,10 @@ root_to_derived = {'cool': 'cooled',
                    'hard': 'hardened',
                    'black': 'blackened'}
 
+derived_to_root = {'cooled': 'cool',
+                   'hardened': 'hard',
+                   'blackened': 'black'}
+
 spacy_nlp = spacy.load("en_core_web_sm",
                        exclude=["ner", "attribute_ruler", "lemmatizer"])
 
@@ -25,7 +29,7 @@ def read_file(filename: str) -> dict:
     return data
 
 
-def get_head(sent: str, target_word) -> str:
+def get_head(sent: str, target_word) -> tuple[str]:
     parsed_doc = spacy_nlp(sent)
     bracketed_target = '[' + target_word + ']'
     target = ''
@@ -35,5 +39,5 @@ def get_head(sent: str, target_word) -> str:
             if bracketed_word == bracketed_target:
                 target = tok.text
                 head = tok.head.text
-    return root_to_derived[target] + ' ' + head
+    return target, head
 

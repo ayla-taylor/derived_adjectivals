@@ -1,112 +1,446 @@
-text,label
-cooled onion,1
-cooled water,1
-cooled engine,1
-cooled exchangers,1
-cooled waffles,1
-cooled potatoes,1
-blackened glass,0
-blackened filet,0
-cooled air,1
-cooled seats,1
-blackened silver,0
-cooled SBCs,1
-cooled chamber,1
-cooled Loads,1
-cooled syrup,1
-cooled batch,1
-cooled macaroons,1
-cooled seats,1
-cooled rollers,1
-cooled Loads,1
-cooled Loads,1
-cooled Attenuators,1
-cooled cows,1
-cooled Loads,1
-cooled seats,1
-cooled type,1
-cooled type,1
-cooled air,1
-cooled Loads,1
-cooled engine,1
-cooled engine,1
-cooled Attenuators,1
-cooled air,1
-cooled seats,1
-cooled cookies,1
-cooled cows,1
-cooled pedestal,1
-cooled products,1
-blackened tilapia,0
-cooled engine,1
-cooled seats,1
-cooled engine,1
-cooled Attenuators,1
-cooled rollers,1
-cooled superconductors,1
-cooled Attenuators,1
-cooled bacon,1
-cooled rollers,1
-cooled mixture,1
-cooled batch,1
-cooled seats,1
-blackened chicken,0
-cooled vegetables,1
-cooled mix,1
-cooled cupcake,1
-cooled rice,1
-cooled system,1
-cooled areas,1
-cooled machines,1
-cooled couscous,1
-cooled condenser,1
-cooled Loads,1
-blackened rafters,0
-cooled feature,1
-cooled seats,1
-cooled chocolate,1
-blackened silver,0
-cooled mixture,1
-cooled Attenuators,1
-cooled engine,1
-cooled lamps,1
-cooled holders,1
-cooled Loads,1
-cooled batch,1
-cooled seats,1
-cooled cookies,1
-cooled macaroons,1
-cooled Desktop,1
-cooled stout,1
-cooled seats,1
-cooled products,1
-cooled quinoa,1
-cooled rollers,1
-cooled holders,1
-cooled butter,1
-blackened sirloin,0
-cooled macaroons,1
-cooled engine,1
-cooled areas,1
-cooled mixture,1
-cooled instruments,1
-cooled cupcakes,1
-cooled array,1
-cooled tea,1
-blackened steel,0
-cooled cake,1
-cooled Loads,1
-cooled seats,1
-cooled type,1
-cooled rollers,1
-cooled water,1
-blackened chicken,0
-cooled spindle,1
-cooled Baywindow,1
-cooled Attenuators,1
-cooled muffins,1
-cooled air,1
-cooled cooler,1
-cooled air,1
-cooled vulcanizers,1
-cooled cameras,1
+text1,text2,label
+hardened tergites,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened [,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened steel,black: color,1
+blackened door,black: color,1
+blackened steel,black: people,0
+hardened melt,"hard: Forceful, potent, vigorous",0
+hardened materials,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened criminals,hard: difficult,0
+hardened matter,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened plex,hard: difficult,0
+hardened is,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened type,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened girlfriend,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened tries,"hard: Forceful, potent, vigorous",0
+hardened ensures,hard: difficult,0
+blackened burlap,"black: evil, bad, unsavory",0
+cooled beetroot,"cool: trendy, fashonable, interesting",0
+hardened produces,hard: difficult,0
+hardened barrier,hard: difficult,0
+hardened is,"hard: Forceful, potent, vigorous",0
+hardened made,hard: difficult,0
+blackened [,"black: evil, bad, unsavory",0
+hardened [,"hard: Forceful, potent, vigorous",0
+blackened hulls,"black: evil, bad, unsavory",0
+blackened brisket,black: color,1
+blackened burlap,black: color,1
+hardened ’s,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened hulk,black: color,1
+hardened soldiers,"hard: Forceful, potent, vigorous",0
+hardened steel,hard: difficult,0
+hardened from,hard: difficult,0
+hardened [,hard: difficult,0
+hardened from,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened part,"hard: Forceful, potent, vigorous",0
+hardened criminals,"hard: Forceful, potent, vigorous",0
+hardened offer,hard: difficult,0
+hardened produces,"hard: Forceful, potent, vigorous",0
+hardened steel,"hard: Forceful, potent, vigorous",0
+blackened steel,black: color,1
+blackened steel,black: people,0
+blackened pans,black: people,0
+hardened remove,"hard: Forceful, potent, vigorous",0
+blackened complex,"black: evil, bad, unsavory",0
+blackened swath,black: color,1
+blackened rings,black: people,0
+blackened hands,"black: evil, bad, unsavory",0
+hardened criminal,"hard: Forceful, potent, vigorous",0
+cooled camera,cool: of or at a relatively low temperature,1
+hardened [,"hard: Forceful, potent, vigorous",0
+blackened fishcakes,black: people,0
+hardened criminals,hard: difficult,0
+hardened remove,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened strength,hard: difficult,0
+cooled tea,"cool: trendy, fashonable, interesting",0
+hardened challenge,"hard: Firm, solid, resistant to pressure, tangible",0
+hardened helps,hard: difficult,0
+hardened believers,"hard: Forceful, potent, vigorous",0
+hardened believers,hard: difficult,0
+cooled say,cool: of or at a relatively low temperature,1
+blackened door,black: people,0
+cooled beetroot,cool: of or at a relatively low temperature,1
+hardened warriors,"hard: Forceful, potent, vigorous",1
+hardened type,"hard: Forceful, potent, vigorous",0
+cooled cows,"cool: trendy, fashonable, interesting",0
+blackened socks,black: color,1
+hardened [,"hard: Firm, solid, resistant to pressure, tangible",0
+hardened hearts,hard: difficult,0
+blackened burlap,black: people,0
+hardened criminals,"hard: Forceful, potent, vigorous",1
+hardened glue,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened cutting,"hard: Forceful, potent, vigorous",0
+blackened shrimp,"black: evil, bad, unsavory",0
+hardened [,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened tycoons,hard: difficult,0
+hardened warrior,"hard: Forceful, potent, vigorous",1
+blackened hulk,"black: evil, bad, unsavory",0
+blackened stuff,black: color,1
+hardened system,hard: difficult,0
+cooled Eggplant,"cool: trendy, fashonable, interesting",0
+blackened hands,black: people,0
+cooled sugar,cool: of or at a relatively low temperature,1
+blackened [,black: color,1
+cooled smoke,cool: of or at a relatively low temperature,1
+hardened [,hard: difficult,0
+hardened [,hard: difficult,0
+hardened [,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened [,"hard: Forceful, potent, vigorous",0
+blackened deal,black: color,0
+hardened soft,hard: difficult,0
+hardened [,hard: difficult,0
+hardened warriors,"hard: Firm, solid, resistant to pressure, tangible",0
+hardened the,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened were,hard: difficult,0
+blackened barrels,black: people,0
+hardened profile,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened skin,"black: evil, bad, unsavory",0
+hardened ensures,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened of,hard: difficult,0
+hardened warrior,"hard: Firm, solid, resistant to pressure, tangible",0
+hardened A,hard: difficult,0
+hardened criminals,"hard: Forceful, potent, vigorous",1
+blackened chips,black: people,0
+hardened see,hard: difficult,0
+hardened experts,"hard: Firm, solid, resistant to pressure, tangible",0
+hardened criminal,hard: difficult,0
+hardened ash,"hard: Forceful, potent, vigorous",0
+blackened hole,black: color,1
+blackened steel,"black: evil, bad, unsavory",0
+blackened chips,"black: evil, bad, unsavory",0
+hardened soldiers,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened soul,"hard: Forceful, potent, vigorous",0
+hardened [,"hard: Forceful, potent, vigorous",0
+blackened steel,black: color,1
+cooled mixture,"cool: trendy, fashonable, interesting",0
+hardened made,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened A,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened pans,"black: evil, bad, unsavory",0
+hardened cholesterol,hard: difficult,0
+hardened sauce,hard: difficult,0
+blackened barrels,black: color,1
+blackened mass,"black: evil, bad, unsavory",1
+blackened steel,"black: evil, bad, unsavory",0
+hardened offer,hard: difficult,0
+hardened sauce,"hard: Forceful, potent, vigorous",0
+blackened circle,black: color,1
+hardened [,"hard: Forceful, potent, vigorous",1
+hardened areas,hard: difficult,0
+cooled watwr,"cool: trendy, fashonable, interesting",0
+cooled cows,"cool: trendy, fashonable, interesting",0
+hardened girlfriend,"hard: Forceful, potent, vigorous",0
+hardened of,"hard: Forceful, potent, vigorous",0
+hardened [,"hard: Forceful, potent, vigorous",0
+hardened had,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened ’s,hard: difficult,0
+hardened soldiers,hard: difficult,0
+hardened devolved,"hard: Firm, solid, resistant to pressure, tangible",0
+hardened torment,"hard: Firm, solid, resistant to pressure, tangible",1
+cooled lemonade,"cool: trendy, fashonable, interesting",0
+blackened oxblood,black: people,0
+hardened sauce,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened [,"hard: Forceful, potent, vigorous",0
+blackened socks,"black: evil, bad, unsavory",0
+hardened come,"hard: Forceful, potent, vigorous",0
+hardened plex,"hard: Firm, solid, resistant to pressure, tangible",0
+blackened skin,black: color,1
+hardened see,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened glass,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened recommended,"hard: Forceful, potent, vigorous",0
+hardened soul,hard: difficult,0
+cooled sugar,"cool: trendy, fashonable, interesting",0
+blackened swath,"black: evil, bad, unsavory",0
+hardened steel,hard: difficult,0
+hardened cholesterol,"hard: Forceful, potent, vigorous",0
+hardened deposits,hard: difficult,0
+hardened shelters,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened cylinder,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened ceiling,"black: evil, bad, unsavory",0
+hardened steel,"hard: Forceful, potent, vigorous",0
+hardened glass,hard: difficult,0
+hardened steel,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened had,hard: difficult,0
+hardened devolved,hard: difficult,0
+hardened cholesterol,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened A,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened glue,hard: difficult,0
+hardened plaster,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened husk,black: color,1
+hardened [,hard: difficult,0
+cooled Place,"cool: trendy, fashonable, interesting",0
+hardened produces,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened [,black: color,1
+blackened swath,black: people,0
+blackened steel,black: people,0
+cooled lemonade,cool: of or at a relatively low temperature,1
+hardened recommended,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened parts,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened steel,"black: evil, bad, unsavory",0
+blackened oxblood,black: color,1
+blackened complex,black: people,0
+hardened warriors,hard: difficult,0
+blackened chicken,"black: evil, bad, unsavory",0
+hardened system,"hard: Forceful, potent, vigorous",0
+hardened from,"hard: Forceful, potent, vigorous",0
+blackened mass,black: color,0
+hardened body,hard: difficult,0
+blackened chicken,black: color,1
+hardened phlegm,"hard: Forceful, potent, vigorous",0
+blackened chicken,black: people,0
+hardened is,hard: difficult,0
+hardened system,"hard: Forceful, potent, vigorous",1
+blackened chips,black: color,1
+hardened were,"hard: Forceful, potent, vigorous",0
+hardened are,hard: difficult,0
+cooled milk,"cool: trendy, fashonable, interesting",0
+cooled butter,cool: of or at a relatively low temperature,1
+blackened rings,"black: evil, bad, unsavory",0
+hardened profile,hard: difficult,0
+blackened hole,"black: evil, bad, unsavory",0
+hardened ensures,"hard: Forceful, potent, vigorous",0
+hardened ash,hard: difficult,0
+blackened hulls,black: color,1
+hardened shelters,"hard: Forceful, potent, vigorous",0
+hardened helps,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened deal,black: people,0
+hardened are,"hard: Forceful, potent, vigorous",0
+blackened trees,black: people,0
+cooled Place,cool: of or at a relatively low temperature,1
+hardened system,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened [,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened [,hard: difficult,0
+blackened [,black: color,1
+hardened finish,hard: difficult,0
+hardened shelters,hard: difficult,0
+hardened finish,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened pans,black: color,1
+hardened plex,"hard: Forceful, potent, vigorous",1
+hardened offer,"hard: Forceful, potent, vigorous",0
+hardened were,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened stuff,"black: evil, bad, unsavory",0
+hardened ash,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened steel,"black: evil, bad, unsavory",0
+hardened are,hard: difficult,0
+hardened Suitable,hard: difficult,0
+hardened cholesterol,"hard: Firm, solid, resistant to pressure, tangible",1
+cooled tea,cool: of or at a relatively low temperature,1
+hardened girlfriend,hard: difficult,0
+hardened remove,hard: difficult,0
+hardened soft,"hard: Forceful, potent, vigorous",0
+blackened husk,black: people,0
+cooled watwr,cool: of or at a relatively low temperature,1
+cooled shortbread,"cool: trendy, fashonable, interesting",0
+hardened system,hard: difficult,0
+hardened finish,"hard: Forceful, potent, vigorous",0
+hardened offer,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened with,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened [,"black: evil, bad, unsavory",0
+hardened challenge,"hard: Forceful, potent, vigorous",1
+hardened torment,hard: difficult,0
+hardened lump,"hard: Forceful, potent, vigorous",0
+blackened heart,"black: evil, bad, unsavory",1
+hardened parts,"hard: Forceful, potent, vigorous",0
+cooled butter,"cool: trendy, fashonable, interesting",0
+hardened made,"hard: Forceful, potent, vigorous",0
+blackened steel,black: color,1
+hardened are,hard: difficult,0
+hardened come,hard: difficult,0
+hardened man,hard: difficult,0
+cooled [,cool: of or at a relatively low temperature,1
+blackened with,black: people,0
+hardened criminal,"hard: Firm, solid, resistant to pressure, tangible",0
+hardened Suitable,"hard: Forceful, potent, vigorous",0
+blackened trees,black: color,1
+blackened husk,"black: evil, bad, unsavory",0
+hardened [,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened steel,black: people,0
+hardened soldiers,"hard: Forceful, potent, vigorous",0
+hardened see,"hard: Forceful, potent, vigorous",0
+hardened distribution,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened heart,black: color,0
+hardened system,"hard: Firm, solid, resistant to pressure, tangible",0
+blackened rings,"black: evil, bad, unsavory",0
+blackened deal,"black: evil, bad, unsavory",1
+cooled boiled,cool: of or at a relatively low temperature,1
+hardened strength,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened soft,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened the,hard: difficult,0
+cooled camera,"cool: trendy, fashonable, interesting",0
+hardened are,"hard: Forceful, potent, vigorous",0
+blackened [,"black: evil, bad, unsavory",0
+blackened rings,black: color,1
+blackened hands,black: color,1
+hardened casted,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened tergites,hard: difficult,0
+hardened plaster,"hard: Forceful, potent, vigorous",0
+cooled cookies,cool: of or at a relatively low temperature,1
+hardened are,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened the,"hard: Forceful, potent, vigorous",0
+hardened A,hard: difficult,0
+hardened ’s,"hard: Forceful, potent, vigorous",0
+hardened devolved,"hard: Forceful, potent, vigorous",1
+hardened [,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened [,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened helps,"hard: Forceful, potent, vigorous",0
+hardened A,"hard: Forceful, potent, vigorous",0
+hardened distribution,hard: difficult,0
+hardened tycoons,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened materials,hard: difficult,0
+hardened casted,"hard: Forceful, potent, vigorous",0
+hardened come,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened ceiling,black: people,0
+hardened A,"hard: Forceful, potent, vigorous",0
+blackened circle,black: people,0
+hardened torment,"hard: Forceful, potent, vigorous",0
+hardened type,hard: difficult,0
+hardened parts,hard: difficult,0
+blackened metal,"black: evil, bad, unsavory",0
+hardened Suitable,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened mass,black: people,0
+hardened [,hard: difficult,0
+hardened tergites,"hard: Forceful, potent, vigorous",0
+hardened body,"hard: Forceful, potent, vigorous",0
+hardened matter,"hard: Forceful, potent, vigorous",0
+hardened distribution,"hard: Forceful, potent, vigorous",0
+hardened cutting,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened steel,hard: difficult,0
+hardened are,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened shrimp,black: people,0
+hardened tries,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened barrels,"black: evil, bad, unsavory",0
+hardened plaster,hard: difficult,0
+hardened A,"hard: Forceful, potent, vigorous",0
+hardened tries,hard: difficult,0
+cooled shortbread,cool: of or at a relatively low temperature,1
+hardened areas,"hard: Forceful, potent, vigorous",0
+blackened [,black: people,0
+blackened hulls,black: people,0
+hardened deposits,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened cholesterol,"hard: Forceful, potent, vigorous",0
+cooled boiled,"cool: trendy, fashonable, interesting",0
+cooled mixture,cool: of or at a relatively low temperature,1
+hardened barrier,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened door,black: people,0
+hardened cholesterol,hard: difficult,0
+blackened stuff,black: people,0
+hardened hearts,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened profile,"hard: Forceful, potent, vigorous",0
+blackened steel,"black: evil, bad, unsavory",0
+hardened [,"hard: Forceful, potent, vigorous",0
+hardened strength,"hard: Forceful, potent, vigorous",0
+hardened of,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened [,hard: difficult,0
+hardened [,"hard: Firm, solid, resistant to pressure, tangible",0
+cooled say,"cool: trendy, fashonable, interesting",0
+hardened lump,hard: difficult,0
+blackened hulk,black: people,0
+blackened oxblood,"black: evil, bad, unsavory",0
+hardened man,"hard: Firm, solid, resistant to pressure, tangible",0
+blackened circle,"black: evil, bad, unsavory",0
+hardened profile,"hard: Forceful, potent, vigorous",0
+cooled smoke,"cool: trendy, fashonable, interesting",0
+hardened casted,hard: difficult,0
+hardened offer,"hard: Forceful, potent, vigorous",0
+blackened socks,black: people,0
+hardened hearts,"hard: Forceful, potent, vigorous",0
+blackened [,black: people,0
+hardened cylinder,hard: difficult,0
+hardened melt,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened criminals,"hard: Firm, solid, resistant to pressure, tangible",0
+hardened [,hard: difficult,0
+hardened parts,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened [,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened tycoons,"hard: Forceful, potent, vigorous",0
+blackened skin,black: people,0
+blackened circle,"black: evil, bad, unsavory",0
+hardened recommended,hard: difficult,0
+hardened soul,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened soldiers,hard: difficult,0
+hardened criminal,hard: difficult,0
+hardened with,hard: difficult,0
+blackened heart,black: people,0
+blackened [,black: people,0
+hardened cylinder,"hard: Forceful, potent, vigorous",0
+hardened profile,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened metal,black: color,1
+hardened experts,"hard: Forceful, potent, vigorous",1
+cooled cows,cool: of or at a relatively low temperature,1
+hardened [,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened shrimp,black: people,0
+blackened hole,black: people,0
+cooled cake,"cool: trendy, fashonable, interesting",0
+blackened shrimp,"black: evil, bad, unsavory",0
+hardened had,"hard: Forceful, potent, vigorous",0
+hardened with,"hard: Forceful, potent, vigorous",0
+cooled cake,cool: of or at a relatively low temperature,1
+hardened parts,"hard: Forceful, potent, vigorous",0
+hardened steel,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened A,hard: difficult,0
+cooled Eggplant,cool: of or at a relatively low temperature,1
+hardened part,hard: difficult,0
+blackened door,"black: evil, bad, unsavory",0
+blackened complex,black: color,1
+hardened man,"hard: Forceful, potent, vigorous",1
+hardened melt,hard: difficult,0
+cooled [,"cool: trendy, fashonable, interesting",0
+hardened glue,"hard: Forceful, potent, vigorous",0
+hardened steel,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened ceiling,black: color,1
+cooled cookies,"cool: trendy, fashonable, interesting",0
+hardened A,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened challenge,hard: difficult,0
+hardened are,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened [,"hard: Forceful, potent, vigorous",0
+hardened believers,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened shrimp,black: color,1
+blackened rings,black: color,1
+blackened brisket,black: people,0
+blackened door,"black: evil, bad, unsavory",0
+blackened fishcakes,"black: evil, bad, unsavory",0
+hardened areas,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened steel,black: people,0
+cooled milk,cool: of or at a relatively low temperature,1
+hardened barrier,"hard: Forceful, potent, vigorous",0
+blackened with,"black: evil, bad, unsavory",0
+hardened criminal,"hard: Forceful, potent, vigorous",1
+blackened with,black: color,1
+hardened experts,hard: difficult,0
+hardened profile,hard: difficult,0
+hardened offer,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened fishcakes,black: color,1
+blackened shrimp,black: color,1
+hardened soldiers,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened needles,black: color,1
+hardened glass,"hard: Forceful, potent, vigorous",0
+hardened phlegm,hard: difficult,0
+hardened criminals,hard: difficult,0
+hardened deposits,"hard: Forceful, potent, vigorous",0
+hardened part,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened trees,"black: evil, bad, unsavory",0
+blackened circle,black: color,1
+blackened brisket,"black: evil, bad, unsavory",0
+hardened are,"hard: Forceful, potent, vigorous",0
+hardened cutting,hard: difficult,0
+hardened lump,"hard: Firm, solid, resistant to pressure, tangible",1
+hardened steel,"hard: Forceful, potent, vigorous",0
+blackened metal,black: people,0
+hardened parts,hard: difficult,0
+hardened criminals,"hard: Firm, solid, resistant to pressure, tangible",0
+cooled cows,cool: of or at a relatively low temperature,1
+hardened [,"hard: Forceful, potent, vigorous",0
+blackened steel,black: color,1
+hardened warrior,hard: difficult,0
+hardened phlegm,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened needles,black: people,0
+hardened criminal,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened circle,black: people,0
+hardened matter,hard: difficult,0
+hardened [,"hard: Forceful, potent, vigorous",1
+hardened materials,"hard: Forceful, potent, vigorous",0
+hardened criminals,"hard: Firm, solid, resistant to pressure, tangible",1
+blackened rings,black: people,0
+hardened [,hard: difficult,0
+blackened door,black: color,1
+hardened [,hard: difficult,0
+blackened needles,"black: evil, bad, unsavory",0
+hardened body,"hard: Firm, solid, resistant to pressure, tangible",1
