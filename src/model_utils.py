@@ -45,9 +45,7 @@ def compute_metrics(predictions, labels):
 
 def make_datasets(data: tuple[str, Any], tokenizer: Any, max_len: int, model: str) -> Any:
     def encode(examples):
-        if model == 'derived_embed':
-            return tokenizer(examples['text'], truncation=True, padding='max_length', max_length=30)
-        elif model == 'baseline':
+        if model != 'full_model':
             return tokenizer(examples['text1'], examples['text2'], truncation=True, padding='max_length', max_length=max_len)
         else:
             if model_group == 'full_model_base':
@@ -70,10 +68,7 @@ def make_datasets(data: tuple[str, Any], tokenizer: Any, max_len: int, model: st
         inputs_embeds = inputs_embeds.with_format('torch')
         return inputs_base, inputs_embeds
     inputs = dataset.map(encode, batched=True)
-    if model == 'derived_embed':
-        inputs = inputs.remove_columns(['text'])
-    else:
-        inputs = inputs.remove_columns(['text1', 'text2'])
+    inputs = inputs.remove_columns(['text1', 'text2'])
     inputs = inputs.rename_column('label', 'labels')
     inputs = inputs.with_format('torch')
     return inputs
