@@ -10,10 +10,6 @@ SOURCE_FILES = ['c4-train.00001-of-01024_adj_ayla_2_filtered.json',
                'c4-train.00001-of-01024_ayla_v3_filtered.json']
 
 spacy_nlp = spacy.load("en_core_web_sm", exclude=['ner', 'lemmatizer', 'textcat'])
-#
-# stanza_nlp = stanza.Pipeline(
-#     lang="en", processors="tokenize,pos,lemma,depparse", tokenize_pretokenized=False
-# )
 
 
 def match_with_words(parsed_doc, word_dicts: list[dict[str:str]]) -> None:

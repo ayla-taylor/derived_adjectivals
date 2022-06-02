@@ -61,7 +61,7 @@ def make_datasets(data: tuple[str, Any], tokenizer: Any, max_len: int, model: st
         inputs_base = inputs_base.with_format('torch')
 
         inputs_embeds = inputs_embeds.remove_columns(['text1', 'text2', 'derived_pair'])
-        inputs_embeds = inputs_embeds.rename_column('label', 'labels')
+        inputs_embeds = inputs_embeds.rename_column('label  ', 'labels')
         inputs_embeds = inputs_embeds.with_format('torch')
         return inputs_base, inputs_embeds
     inputs = dataset.map(encode, batched=True)
