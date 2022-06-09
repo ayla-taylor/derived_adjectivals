@@ -21,27 +21,19 @@ def parse(data: dict, index: int):
         for i, tok in enumerate(sent):
             if tok.text == target_word:
                 print(sent)
-                # print(tok.text, tok.dep_, tok.head.text, tok.head.pos_)
                 if tok.tag_ == 'JJ':
-                    # print(tok.text)
-                    # print(i)
                     auto_tagged_indexes.append(i)
                 else:
                     indexes.append(i)
-        # print(sents)
         for j in indexes:
-            # print([tok.text for tok in sent[:j]])
             sent_str = ' '.join([tok.text for tok in sent[:j]]) + ' [' + sent[j].text + '] ' + \
                        ' '.join([tok.text for tok in sent[j+1:]])
-            # print(sent_str)
             sent_dict = {'index': index, 'data': sent_str}
             index += 1
             sents.append(sent_dict)
         for j in auto_tagged_indexes:
-            # print([tok.text for tok in sent[:j]])
             sent_str = ' '.join([tok.text for tok in sent[:j]]) + ' [' + sent[j].text + '] ' + \
                        ' '.join([tok.text for tok in sent[j+1:]])
-            # print(sent_str)
             sent_dict = {'index': index, 'data': sent_str}
             index += 1
             auto_sents.append(sent_dict)
@@ -94,7 +86,7 @@ def parse(data: dict, index: int):
 
 def create_files(filename: str, subfolder: str) -> None:
     print(f"processing {filename}")
-    path = '../data/'
+    path = '../data/pre_annotation/'
     outfile = filename[:-5] + "_annotation_ready.json"
     spacy_outfile = filename[:-5] + "_spacy.json"
     out_lines = []
@@ -126,7 +118,7 @@ def create_files(filename: str, subfolder: str) -> None:
 
 
 def main():
-    path = '../data/'
+    path = '../data/pre_annotation/'
     subfolder = sys.argv[-1]
     files = os.listdir(path + subfolder)
     # filename = 'double_derived/cooled.json'
