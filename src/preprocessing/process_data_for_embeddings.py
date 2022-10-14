@@ -2,7 +2,7 @@ import json
 import pandas as pd
 import spacy
 import random
-from preprocessing_utils import derived_to_root, get_head
+from src.preprocessing.preprocessing_utils import derived_to_root, get_head
 
 DATAFILES = ['cooled-sense-annotation-only_annotations.json',
              'blackened-sense-only_annotations.json',
@@ -16,7 +16,7 @@ DATAFILES = ['cooled-sense-annotation-only_annotations.json',
 #                             'Sense 2': '1',
 #                             'Sense 3': '0'},
 #               }
-SENSE_DICT_FILE = "../data/sense_dict.json"
+SENSE_DICT_FILE = "../../data/sense_dict.json"
 
 
 spacy_nlp = spacy.load("en_core_web_sm",
@@ -49,7 +49,7 @@ def read_file(filename: str) -> dict:
 #     return ' '.join(truncated_sent)
 
 def main():
-    filepath = '../data/Annotated/'
+    filepath = '../../data/Annotated/'
     with open(SENSE_DICT_FILE, 'r', encoding='utf8') as f:
         sense_dict = json.load(f)
     sentence_dicts = []

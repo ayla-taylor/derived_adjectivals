@@ -72,7 +72,6 @@ def train_full_model(model_dict: dict) -> None:
     # for split in ['train', 'dev', 'test']:
     # gpu_avaliable = True if torch.cuda.is_available() else False
     datafile = '../data/full_model/train.csv'
-    eval_file = '../data/full_model/dev.csv'
     df = pd.read_csv(datafile)
     text1 = df['text1'].tolist()
     text2 = df['text2'].tolist()
@@ -80,6 +79,7 @@ def train_full_model(model_dict: dict) -> None:
     label_1d = torch.tensor(df['label'])
     # torch.save(label_1d, 'labels.pt')
     label_list = []
+    # make the lables one-hot
     for label in df['label']:
         if label == 0:
             label_list.append([1, 0])
@@ -105,6 +105,7 @@ def train_full_model(model_dict: dict) -> None:
     # torch.save(eval_labels, 'eval_labels.pt')
 
     print('initializing models and tokenizers....')
+    # getting the correct model name
     baseline_model_name, embed_model_name = model_dict['base_model']
     baseline_model_name = baseline_model_name + args.baseline_checkpoint
     embed_model_name = embed_model_name + args.embed_checkpoint
@@ -115,13 +116,13 @@ def train_full_model(model_dict: dict) -> None:
     embed_tokenizer = BertTokenizer.from_pretrained(embed_model_name)
     embed_model = BertModel.from_pretrained(embed_model_name)
 
-    print("tokenixing...")
+    print("tokenizing...")
     inputs_base = baseline_tokenizer(text1, text2, pad_to_max_length=True, truncation=True, max_length=120,
                                      return_tensors='pt')
     inputs_embeds = embed_tokenizer(derived_pairs, pad_to_max_length=True, truncation=True, max_length=15,
                                     return_tensors='pt')
 
-    print("tokenixing...")
+    print("tokenizing...")
     eval_inputs_base = baseline_tokenizer(eval_text1, eval_text2, pad_to_max_length=True, truncation=True, max_length=120,
                                           return_tensors='pt')
     eval_inputs_embeds = embed_tokenizer(eval_derived_pairs, pad_to_max_length=True, truncation=True, max_length=15,
@@ -171,27 +172,27 @@ def train_full_model(model_dict: dict) -> None:
     eval_inputs = torch.concat((eval_squished_basedline_hidden, eval_squished_embed_hidden), 1)
     print(eval_inputs.shape)
     torch.save(eval_inputs, 'eval_embed.pt')
-    # model = DenseModel(inputs.shape[2], 2)
-    #
-    # loss = nn.CrossEntropyLoss()
-    # optimizer = optim.SGD(model.parameters(), lr=args.lr)
-    #
-    # running_loss = 0.0
-    # for epoch in tqdm(range(args.epochs)):
-    #
-    #     # zero the parameter gradients
-    #     optimizer.zero_grad()
-    #
-    #     # forward + backward + optimize
-    #     outputs = model(inputs)
-    #     l = loss(outputs, labels)
-    #     l.backward()
-    #     optimizer.step()
-    #
-    #     # print statistics
-    #     running_loss += l.item()
-    #     # f1 = compute_metrics(outputs, lable_1d)
-    #     # print("f1:", f1, 'loss:', loss.item())
+    model = DenseModel(inputs.shape[2], 2)
+
+    loss = nn.CrossEntropyLoss()
+    optimizer = optim.SGD(model.parameters(), lr=args.lr)
+
+    running_loss = 0.0
+    for epoch in tqdm(range(args.epochs)):
+
+        # zero the parameter gradients
+        optimizer.zero_grad()
+
+        # forward + backward + optimize
+        outputs = model(inputs)
+        l = loss(outputs, labels)
+        l.backward()
+        optimizer.step()
+
+        # print statistics
+        running_loss += l.item()
+        f1 = compute_metrics(outputs, lable_1d)
+        print("f1:", f1, 'loss:', loss.item())
 
 
 def main():
@@ -200,13 +201,7 @@ def main():
     model_dict = MODEL_INFO[model_name]
     if model_name == 'full_model':
         train_full_model(model_dict)
-        # model_dict['tokenizer'] = []
-        # model_dict['model'] = []
-        # for base_model in model_dict['base_model']:
-        #     model_dict['tokenizer'].append(AutoTokenizer.from_pretrained(base_model))
-        #     model_dict['model'].append(BertModel.from_pretrained(base_model)
     else:
-
         model_dict['tokenizer'] = BertTokenizer.from_pretrained(model_dict['base_model'])
 
         if model_name == 'baseline':

@@ -10,16 +10,11 @@ from preprocessing_utils import read_sense_dict, read_file, root_to_derived, get
 # parser.add_argument('model', type=str, default='baseline', help='which model is this preprocessing for')
 # args = parser.parse_args()
 
-SENSE_DICT_FILE = "../data/sense_dict.json"
-
-
-#
-# def process_embed_data(datafiles: list[list[str]]) -> None:
-#     filepath = '../data/'
+SENSE_DICT_FILE = "../../data/sense_dict.json"
 
 
 def process_model_files(datafiles: list[str], sense_dict: dict) -> None:
-    filepath = '../data/Annotated/'
+    filepath = '../../data/Annotated/'
     sentence_dicts = []
     for datafile in datafiles:
         data = read_file(filepath + datafile)

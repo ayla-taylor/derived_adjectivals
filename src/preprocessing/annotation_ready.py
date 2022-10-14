@@ -1,3 +1,4 @@
+# The point of this file is to get the data in the format for annotating
 import random
 import sys
 import json
@@ -9,7 +10,7 @@ spacy_nlp = spacy.load("en_core_web_sm",
                        exclude=["ner", "attribute_ruler", "lemmatizer"])
 
 
-def parse(data: dict, index: int):
+def parse(data: dict, index: int) -> tuple:
     sents = []
     target_word = data['target_word']
     text = data['text']
@@ -27,90 +28,45 @@ def parse(data: dict, index: int):
                     indexes.append(i)
         for j in indexes:
             sent_str = ' '.join([tok.text for tok in sent[:j]]) + ' [' + sent[j].text + '] ' + \
-                       ' '.join([tok.text for tok in sent[j+1:]])
+                       ' '.join([tok.text for tok in sent[j + 1:]])
             sent_dict = {'index': index, 'data': sent_str}
             index += 1
             sents.append(sent_dict)
         for j in auto_tagged_indexes:
             sent_str = ' '.join([tok.text for tok in sent[:j]]) + ' [' + sent[j].text + '] ' + \
-                       ' '.join([tok.text for tok in sent[j+1:]])
+                       ' '.join([tok.text for tok in sent[j + 1:]])
             sent_dict = {'index': index, 'data': sent_str}
             index += 1
             auto_sents.append(sent_dict)
     return sents, auto_sents, index
-    # target_found = False
-    # for sent in parsed_doc.sents:
-    #     sent_str = ''
-    #     target_sent = False
-    #     extra_targets = 0
-    #     for tok in sent:
-    #         if tok.text == target_word:
-    #             if not target_found:
-    #                 sent_str += '[' + tok.text + '] '
-    #                 target_sent = True
-    #                 target_found = True
-    #             else:
-    #                 sent_str += tok.text + ' '
-    #                 extra_targets += 1
-    #         else:
-    #             sent_str += tok.text + ' '
-    #     sents.append((index, sent_str))
-    #     index += 1
-    #     previous = 1
-    #     while extra_targets > 0:
-    #         found = 0
-    #         # print(extra_targets)
-    #         target_found = False
-    #         # sent_str += '\n '
-    #         sent_str = ''
-    #         for tok in sent:
-    #             if tok.text == target_word:
-    #                 found += 1
-    #                 if previous >= found:
-    #                     sent_str += tok.text + ' '
-    #                 elif not target_found:
-    #                     sent_str += '[' + tok.text + '] '
-    #                     target_found = True
-    #                     extra_targets -= 1
-    #                     previous += 1
-    #                 else:
-    #                     sent_str += tok.text + ' '
-    #             else:
-    #                 sent_str += tok.text + ' '
-    #     sents.append((index, sent_str))
-    #     index += 1
-    #     if target_sent:
-    #         # return sent_str
-    #         return sents, index
 
 
 def create_files(filename: str, subfolder: str) -> None:
+    """Create the files for the auto extracted data and the ones that are ready to be annotated"""
     print(f"processing {filename}")
-    path = '../data/pre_annotation/'
+    path = '../../data/pre_annotation/'
     outfile = filename[:-5] + "_annotation_ready.json"
     spacy_outfile = filename[:-5] + "_spacy.json"
     out_lines = []
     auto_lines = []
-    # out_dict = {'data': {}}
     index = 0
+    # get data from files
     with open(path + subfolder + filename, 'r', encoding='utf8') as f:
         for line in tqdm.tqdm(f):
             data: dict = json.loads(line.strip())
-            # print(type(data))
             str_list, auto_str, index = parse(data, index)
             for s in str_list:
                 out_lines.append(s)
             for auto in auto_str:
                 auto_lines.append(auto)
-            # out_lines.append(parse(data))
-    # outlines_uniq = list(set(out_lines))
     random.shuffle(out_lines)
     random.shuffle(auto_lines)
+
+    # output into the two files
     with open(path + subfolder + outfile, "w", encoding='utf8') as out_f:
         if len(out_lines) > 500:
             out_lines = out_lines[:500]
         json.dump(out_lines, out_f)
-
     with open(path + subfolder + spacy_outfile, "w", encoding='utf8') as out_f:
         if len(auto_lines) > 500:
             auto_lines = auto_lines[:500]
@@ -118,10 +74,10 @@ def create_files(filename: str, subfolder: str) -> None:
 
 
 def main():
-    path = '../data/pre_annotation/'
+    path = '../../data/pre_annotation/'
+    # the subfolder will either the category of target word
     subfolder = sys.argv[-1]
     files = os.listdir(path + subfolder)
-    # filename = 'double_derived/cooled.json'
     [create_files(file, subfolder) for file in files]
 
 
